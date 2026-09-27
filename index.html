@@ -277,7 +277,7 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
       <div class="stat">
         <span class="stat__label">旗舰输出价对比（每百万 token）</span>
         <span class="stat__value">≈1/10<span class="unit">起</span></span>
-        <span class="stat__note">Claude Opus 5.5 输出 $20、GPT-5.2 输出 $14，GPT-6 宣布「定价减半」（未核实）[15]；国产旗舰主流档位普遍低一个数量级，DeepSeek Flash 档再降 60% [3]</span>
+        <span class="stat__note">Claude Opus 5.5 输出 $20，GPT-6 宣布「定价减半」（约合 $7，未核实）[15]；国产旗舰主流档位普遍低一个数量级，DeepSeek Flash 档再降 60% [3]</span>
       </div>
       <div class="stat">
         <span class="stat__label">开放权重阵营</span>
@@ -309,7 +309,7 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
   <div class="prose reveal">
     <p><strong>第一梯队已经形成，而且大多开源。</strong>DeepSeek、阿里通义 Qwen、智谱 GLM、月之暗面 Kimi、字节豆包这五家处于第一梯队：Qwen3.8-Max、Kimi K3、GLM-5.3、DeepSeek-V4.1 在编程、推理和智能体（Agent）任务上已对标 Claude Opus 4.5–4.6 档 [13]；最前沿的闭源模型（GPT-6、Claude Opus 5.5、Gemini 3.1）仍略微领先，但差距以「周」计。百度文心、腾讯混元、MiniMax、讯飞星火、阶跃星辰紧随其后，各有多模态或垂直场景的独门优势。</p>
     <p><strong>开源是中国模型最大的战略筹码。</strong>十家主要厂商里八家开放了权重：Qwen 开源权重半年下载超 30 亿次、衍生模型超 15 万个，体量已超过 Meta 与 Google 的开源总和 [5]；Kimi K3 成为全球首个 3 万亿级开源模型，连美国公司 Cognition 都基于它训练了自己的编程模型 [8]。</p>
-    <p><strong>价格优势依然悬殊。</strong>Claude Opus 5.5 每百万 token 输出收 $20，GPT-5.2 收 $14，新旗舰 GPT-6 虽宣布「定价减半」仍约合 $7 [15]；国产旗舰主流档位普遍低一个数量级，DeepSeek V4.1 Flash 发布时还在 V4 基础上最高降价 60%，第三方测算其成本约为同档国产竞品的 1/7 [4]。「智能普惠」这件事，事实上正由中国模型推动。</p>
+    <p><strong>价格优势依然悬殊。</strong>Claude Opus 5.5 每百万 token 输出收 $20，新旗舰 GPT-6 宣布「定价减半」、约合 $7 [15]；国产旗舰主流档位普遍低一个数量级，DeepSeek V4.1 Flash 发布时还在 V4 基础上最高降价 60%，第三方测算其成本约为同档国产竞品的 1/7 [4]。「智能普惠」这件事，事实上正由中国模型推动。</p>
     <p class="caption">以下每一节都附来源编号，对应文末「数据来源」一节；标注「待核实」表示公开来源尚不一致，本页宁缺毋滥。</p>
   </div>
 </section>
@@ -552,7 +552,7 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
           <td><span class="m">GPT-6 Sol / Luna</span><small>OpenAI</small></td>
           <td class="num">2026-09-22</td><td>未公开</td><td class="num">待核实</td>
           <td class="num">「定价减半」≈$7 出（报道推算，未核实）[15]</td><td>闭源</td>
-          <td>OpenAI 现役旗舰；前代 GPT-5.2 为 $1.75 / $14</td>
+          <td>OpenAI 现役旗舰（较前代「定价减半」）</td>
         </tr>
         <tr class="us">
           <td><span class="m">Claude Opus 5.5</span><small>Anthropic</small></td>
@@ -613,11 +613,11 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
   <div class="section-head reveal">
     <span class="eyebrow">价格对比</span>
     <h2>同样一笔预算，能用多少「脑力」</h2>
-    <p>比旗舰输出价（每百万 token，2026-09，未计缓存与批量折扣）：Opus 5.5 与 GPT-5.2 用官方挂牌价；GPT-6 官方尚未公布单价，按其「定价减半」报道推算并明确标注。国产多数厂商未公开可比单价，故不画柱、只在文字里交代量级。</p>
+    <p>比旗舰输出价（每百万 token，2026-09，未计缓存与批量折扣），只放现役旗舰：Opus 5.5 用官方挂牌价；GPT-6 与 DeepSeek V4.1 Flash 官方未公布单价，分别按「定价减半」「最高再降 60%」报道推算并明确标注。国产多数厂商未公开可比单价，故不画柱、只在文字里交代量级。</p>
   </div>
   <div class="chart reveal" id="priceChart"><!-- 由 JS 渲染 --></div>
   <div class="prose reveal" style="margin-top:var(--s-6)">
-    <p><strong>怎么读这张图：</strong>Anthropic 对 Claude Opus 5.5 的输出收 $20 / 百万 token，OpenAI 对 GPT-5.2 收 $14，而新旗舰 GPT-6 宣布「定价减半」（约合 $7，官方单价页待核实）[15]；DeepSeek V4.1 Flash 发布时在 V4 基础上最高降价 60%，第三方测算其成本约为同档国产竞品（Kimi / GLM）的 1/7 [4]——换算下来，即便按减半后的 GPT-6 价格计，国产旗舰的输出价格也普遍再低数倍，<strong>Flash 档差距达一个数量级</strong>。</p>
+    <p><strong>怎么读这张图：</strong>Anthropic 对 Claude Opus 5.5 的输出收 $20 / 百万 token；OpenAI 新旗舰 GPT-6 宣布「定价减半」——按前代 GPT-5.2 官方价 $14 折算约 $7（官方单价页待核实）[15]；DeepSeek V4.1 Flash 则在 V4 Flash 档（¥2）基础上最高再降 60% [3][15]——换算下来，即便按减半后的 GPT-6 价格计，国产旗舰的输出价格也普遍再低数倍，<strong>Flash 档差距达一个数量级</strong>。</p>
     <p><strong>换一种感受：</strong>用 Claude Opus 5.5 输出 1 亿 token 约需 1.4 万元人民币；这个预算在国产旗舰档位上通常能买到十倍量级的调用量。对以 token 计价的 Agent 工作流来说，这个差距直接决定了「跑不跑得起」。</p>
     <p class="caption">海外厂商亦有批量折扣与缓存价，实际账单因负载而异；此处只比标准挂牌价，国产单价以各家官网实时页为准。</p>
   </div>
@@ -820,12 +820,11 @@ renderChart('userChart', [
   {label:'DeepSeek', v:1.30, color:'cn', note:'竞争分流'},
 ], {max:4.2, unit:' 亿'});
 
-/* API 输出价格：¥ / 百万 token（2026-09；Opus / GPT-5.2 为官方挂牌价，GPT-6 按「定价减半」报道推算）[15][16] */
+/* API 输出价格：¥ / 百万 token（2026-09；只放现役旗舰。Opus 为官方价，GPT-6 与 DeepSeek 按「定价减半 / 最高再降 60%」报道推算）[15][16] */
 renderChart('priceChart', [
-  {label:'Claude Opus 5.5 🇺🇸',  v:142, color:'us', note:'$20 · 官方价'},
-  {label:'GPT-6 Sol / Luna 🇺🇸', v:50,  color:'us', note:'≈$7 · 按「定价减半」报道推算，官方未核实'},
-  {label:'GPT-5.2（前代）🇺🇸',    v:99,  color:'us', note:'$14 · 官方价'},
-  {label:'DeepSeek V4-Flash 🇨🇳', v:2,   color:'cn', note:'2026-07 报道档，V4.1 再降'},
+  {label:'Claude Opus 5.5 🇺🇸',    v:142, color:'us', note:'$20 · 官方价'},
+  {label:'GPT-6 Sol / Luna 🇺🇸',   v:50,  color:'us', note:'≈$7 · 按「定价减半」报道推算，官方未核实'},
+  {label:'DeepSeek V4.1 Flash 🇨🇳', v:1,   color:'cn', note:'由 V4 档 ¥2 与「最高再降 60%」推算'},
 ], {max:160, unitPre:'¥'});
 
 /* ---------- 数据来源 ---------- */
