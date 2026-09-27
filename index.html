@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国产大模型全景 2026 —— 现在的国产大模型，和国外比怎么样？</title>
+<meta name="description" content="一页看懂 2026 年 9 月的中国国产大模型：主要玩家、中外旗舰对比、跑分与价格、开源生态、发展时间线与选型建议。数据截至 2026-09，全部标注来源。">
+<meta property="og:title" content="国产大模型全景 2026">
+<meta property="og:description" content="现在的国产大模型，和国外比怎么样？主要玩家 · 中外对比 · 跑分价格 · 开源生态 · 时间线。数据截至 2026-09，全部标注来源。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edwardmah007-hue.github.io/cn-llm/">
+<meta property="og:image" content="https://edwardmah007-hue.github.io/cn-llm/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8552f'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23faf9f7' font-family='serif'%3E%E6%A8%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   tokens — 明亮编辑风：暖白纸底、衬线标题、一个朱砂橙强调色（web-style base.css）
+   ========================================================================== */
+:root{
+  --n-0:#ffffff; --n-50:#faf9f7; --n-100:#f4f2ee; --n-200:#e9e5df;
+  --n-300:#d6d0c7; --n-400:#a8a199; --n-500:#7d766d; --n-700:#46403a; --n-900:#1c1b19;
+  --bg:var(--n-50); --surface:var(--n-0); --ink:var(--n-900);
+  --ink-muted:var(--n-500); --line:var(--n-200);
+  --accent:#b8552f;                      /* 朱砂橙：全页唯一强调色 */
+  --accent-ink:#ffffff;
+  --accent-soft:color-mix(in srgb, var(--accent) 8%, var(--bg));
+  --ok:#3f7d5a; --warn:#9a6a12; --bad:#b0432f;
+  --font-serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif; /* 离线时回退系统宋体 */
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",
+              "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC","Microsoft YaHei",monospace;
+  --t--1:clamp(0.80rem,0.77rem + 0.13vw,0.86rem);
+  --t-0:clamp(1.00rem,0.96rem + 0.19vw,1.09rem);
+  --t-1:clamp(1.19rem,1.12rem + 0.31vw,1.33rem);
+  --t-2:clamp(1.41rem,1.30rem + 0.50vw,1.66rem);
+  --t-3:clamp(1.68rem,1.50rem + 0.78vw,2.07rem);
+  --t-4:clamp(2.00rem,1.72rem + 1.19vw,2.59rem);
+  --t-5:clamp(2.37rem,1.95rem + 1.78vw,3.24rem);
+  --lh-tight:1.25; --lh-head:1.35; --lh-body:1.8; --lh-flat:1.15; /* CJK 行高：cjk.md §2 */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+  --r-1:4px; --r-2:8px; --r-3:12px; --r-4:16px; --r-pill:9999px;
+  --sh-2:0 1px 2px #08080808,0 2px 4px #0808080a,0 4px 8px #0808080d;
+  --ease:cubic-bezier(0.16,1,0.3,1); --dur:0.2s;
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-sans); font-size:17px; line-height:var(--lh-body);
+  font-synthesis:none; text-rendering:optimizeLegibility;
+}
+img,svg{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit}
+::selection{background:color-mix(in srgb,var(--accent) 25%,transparent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r-1)}
+
+/* ---------- 排版 ---------- */
+h1,h2,h3{font-family:var(--font-serif);font-weight:700;text-wrap:balance;letter-spacing:0}
+h1{font-size:var(--t-5);line-height:var(--lh-tight)}
+h2{font-size:var(--t-3);line-height:var(--lh-head)}
+h3{font-size:var(--t-1);line-height:var(--lh-head)}
+p,li{text-wrap:pretty;max-width:36em;letter-spacing:0}       /* 中文量度 ~36em */
+strong{font-weight:600}
+em{font-style:normal;font-weight:600}                        /* 中文没有斜体 */
+a{color:var(--accent);text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  transition:border-color var(--dur) var(--ease)}
+a:hover{border-bottom-color:var(--accent)}
+.num,time{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:var(--t--1);font-weight:600;letter-spacing:.12em;color:var(--accent)}
+.caption,.small{font-size:var(--t--1);color:var(--ink-muted);line-height:1.6}
+
+.wrap{max-width:72rem;margin-inline:auto;padding-inline:var(--s-4)}
+.prose{max-width:42em}                                        /* 中文正文稍宽 */
+.section{padding-block:var(--s-9)}
+.section-head{margin-bottom:var(--s-6)}
+.section-head .eyebrow{display:block;margin-bottom:var(--s-2)}
+.section-head h2{max-width:24em}
+.section-head p{margin-top:var(--s-3);color:var(--ink-muted)}
+hr.rule{border:0;border-top:1px solid var(--line);margin-block:0}
+
+/* ---------- 导航 ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:var(--s-5);
+  height:60px;padding-inline:var(--s-5);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--dur) var(--ease);
+}
+.nav[data-scrolled]{border-bottom-color:var(--line)}
+.nav__brand{font-family:var(--font-serif);font-weight:700;font-size:var(--t-1);
+  color:var(--ink);white-space:nowrap}
+.nav__brand small{display:block;font-family:var(--font-sans);font-weight:400;
+  font-size:var(--t--1);color:var(--ink-muted);letter-spacing:.06em}
+.nav__links{display:flex;gap:var(--s-1);margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav__links::-webkit-scrollbar{display:none}
+.nav__link{padding:6px 10px;border-radius:var(--r-1);color:var(--ink-muted);
+  white-space:nowrap;border-bottom:none;
+  transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease)}
+.nav__link:hover{color:var(--ink);background:var(--n-100)}
+.nav__badge{font-size:var(--t--1);color:var(--accent);border:1px solid
+  color-mix(in srgb,var(--accent) 35%,transparent);border-radius:var(--r-pill);
+  padding:4px 10px;white-space:nowrap}
+@media (max-width:820px){ .nav__badge{display:none} .nav__brand small{display:none} }
+
+/* ---------- Hero ---------- */
+.hero{padding-block:var(--s-8) var(--s-9);
+  background:
+    radial-gradient(60rem 24rem at 85% -10%, var(--accent-soft), transparent 65%);
+}
+.hero h1{margin-top:var(--s-4);max-width:18em}
+.hero .lede{margin-top:var(--s-4);font-size:var(--t-1);line-height:1.85;color:var(--n-700);max-width:34em}
+.hero-meta{margin-top:var(--s-5);display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--t--1);
+  color:var(--n-700);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:6px 12px}
+.pill b{font-weight:600;color:var(--ink)}
+.stat-row{margin-top:var(--s-7);display:grid;gap:var(--s-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-3);
+  padding:var(--s-4) var(--s-5);display:flex;flex-direction:column;gap:var(--s-1)}
+.stat__label{font-size:var(--t--1);color:var(--ink-muted)}
+.stat__value{font-family:var(--font-serif);font-size:var(--t-3);line-height:var(--lh-flat);
+  font-weight:700;font-variant-numeric:tabular-nums}
+.stat__value .unit{font-size:.55em;font-weight:600;color:var(--ink-muted);margin-left:2px}
+.stat__note{font-size:var(--t--1);color:var(--ink-muted);line-height:1.6}
+
+/* ---------- 卡片网格 ---------- */
+.filter-row{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-bottom:var(--s-5)}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-pill);
+  padding:7px 14px;font-size:var(--t--1);color:var(--n-700);cursor:pointer;
+  transition:all var(--dur) var(--ease)}
+.chip:hover{border-color:var(--n-300);background:var(--n-100)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card-grid{display:grid;gap:var(--s-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-4);
+  padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-3);
+  transition:border-color var(--dur) var(--ease)}
+.card:hover{border-color:var(--n-300)}
+.card__top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-2)}
+.card__name{font-family:var(--font-serif);font-size:var(--t-2);font-weight:700;line-height:1.3}
+.card__org{font-size:var(--t--1);color:var(--ink-muted)}
+.tag{display:inline-block;font-size:var(--t--1);line-height:1;padding:5px 9px;
+  border-radius:var(--r-pill);white-space:nowrap;font-weight:600}
+.tag--open{color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,var(--surface))}
+.tag--closed{color:var(--n-700);background:var(--n-100)}
+.card__flagship{border-left:3px solid var(--accent);padding-left:var(--s-3)}
+.card__flagship b{font-weight:600}
+.card__flagship time{color:var(--ink-muted);font-size:var(--t--1)}
+.card__spec{font-size:var(--t--1);color:var(--n-700);line-height:1.7}
+.card__spec dt{float:left;clear:left;color:var(--ink-muted)}
+.card__spec dd{margin:0 0 0 5.5em}
+.card p.desc{font-size:var(--t--1);color:var(--n-700);margin:0}
+
+/* ---------- 表格 ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-4);
+  background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:var(--t--1);min-width:56rem}
+th,td{padding:12px var(--s-4);text-align:left;vertical-align:top;
+  border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;z-index:1;background:var(--n-100);font-weight:600;
+  color:var(--n-700);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--n-50)}
+td .m{font-weight:600;white-space:nowrap}
+td small{display:block;color:var(--ink-muted);margin-top:2px;font-weight:400}
+tr.cn td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+tr.us td:first-child{box-shadow:inset 3px 0 0 var(--n-300)}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s-4);margin-bottom:var(--s-4);font-size:var(--t--1);color:var(--n-700)}
+.legend .key{display:inline-flex;align-items:center;gap:6px}
+.legend .swatch{width:12px;height:12px;border-radius:3px;background:var(--accent)}
+.legend .swatch--us{background:var(--n-300)}
+
+/* ---------- 条形图 ---------- */
+.chart{display:flex;flex-direction:column;gap:var(--s-3)}
+.bar-row{display:grid;grid-template-columns:11em 1fr;gap:var(--s-3);align-items:center}
+.bar-row .label{font-size:var(--t--1);color:var(--ink);text-align:right;line-height:1.4}
+.bar-track{position:relative;height:26px;background:var(--n-100);border-radius:var(--r-1)}
+.bar-fill{position:absolute;inset:0 auto 0 0;border-radius:var(--r-1);
+  background:var(--n-300);min-width:2px;
+  transition:width .8s var(--ease)}
+.bar-fill--cn{background:var(--accent)}
+.bar-fill--us{background:var(--n-400)}
+.bar-val{position:absolute;top:50%;transform:translateY(-50%);margin-left:8px;
+  font-size:var(--t--1);color:var(--n-700);white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+@media (max-width:560px){
+  .bar-row{grid-template-columns:1fr}
+  .bar-row .label{text-align:left}
+}
+
+/* ---------- 时间线 ---------- */
+.timeline{position:relative;margin-left:.4em;padding-left:var(--s-6);
+  border-left:1px solid var(--n-300);display:flex;flex-direction:column;gap:var(--s-6)}
+.tl-item{position:relative;max-width:38em}
+.tl-item::before{content:"";position:absolute;left:calc(-1 * var(--s-6) - 5px);top:.55em;
+  width:9px;height:9px;border-radius:50%;background:var(--bg);
+  border:2px solid var(--accent)}
+.tl-item.mute::before{border-color:var(--n-300)}
+.tl-item time{display:block;font-size:var(--t--1);color:var(--accent);font-weight:600;
+  letter-spacing:.02em}
+.tl-item h3{margin:2px 0 var(--s-1)}
+.tl-item p{font-size:var(--t-0);color:var(--n-700)}
+
+/* ---------- 场景卡 ---------- */
+.pick{display:grid;gap:var(--s-5);grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.pick .card h3{display:flex;align-items:center;gap:var(--s-2)}
+.pick .rec{font-size:var(--t--1);color:var(--ink-muted)}
+.pick .rec b{color:var(--accent);font-weight:600}
+
+/* ---------- 引用/来源 ---------- */
+.refs{counter-reset:ref;display:flex;flex-direction:column;gap:var(--s-2)}
+.refs li{list-style:none;position:relative;padding-left:2.4em;font-size:var(--t--1);
+  color:var(--n-700);max-width:52em}
+.refs li::before{counter-increment:ref;content:"[" counter(ref) "]";
+  position:absolute;left:0;color:var(--accent);font-variant-numeric:tabular-nums}
+.disclaimer{background:var(--accent-soft);border:1px solid
+  color-mix(in srgb,var(--accent) 20%,transparent);border-radius:var(--r-3);
+  padding:var(--s-4) var(--s-5);font-size:var(--t--1);color:var(--n-700);max-width:52em}
+
+footer{border-top:1px solid var(--line);padding-block:var(--s-7);color:var(--ink-muted);
+  font-size:var(--t--1)}
+footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
+
+/* ---------- 动效 ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);
+    transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal.is-in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+@media print{ .nav,.filter-row{display:none} .section{padding-block:var(--s-6)} }
+</style>
+</head>
+<body>
+
+<!-- ================= 导航 ================= -->
+<nav class="nav" id="top">
+  <div class="nav__brand">国产大模型全景<small>CHINA LLM LANDSCAPE</small></div>
+  <div class="nav__links">
+    <a class="nav__link" href="#players">主要玩家</a>
+    <a class="nav__link" href="#versus">中外对比</a>
+    <a class="nav__link" href="#bench">跑分</a>
+    <a class="nav__link" href="#price">价格</a>
+    <a class="nav__link" href="#oss">开源生态</a>
+    <a class="nav__link" href="#timeline">时间线</a>
+    <a class="nav__link" href="#guide">怎么选</a>
+    <a class="nav__link" href="#refs">来源</a>
+  </div>
+  <span class="nav__badge">数据截至 2026-09</span>
+</nav>
+
+<!-- ================= Hero ================= -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">2026 年 9 月 · 一页数据手册</span>
+    <h1>国产大模型，<br>现在到底追到哪一步了？</h1>
+    <p class="lede">三年前大家还在讨论「什么时候赶上 GPT-4」；到今天，头部国产模型在编程、推理和智能体任务上已经进入世界第一梯队，开源阵营更是直接改写了全球格局。这一页用数据和来源，把「现在」讲清楚。</p>
+    <div class="hero-meta">
+      <span class="pill">📌 <b>10</b> 家主要厂商，<b>8</b> 家开放权重</span>
+      <span class="pill">🤖 <b>8</b> 款中外旗舰同表对比</span>
+      <span class="pill">🔓 全球首个 3 万亿级开源模型来自中国</span>
+      <span class="pill">📱 国内 AI 应用月活 <b>4.99 亿</b> [14]</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat__label">旗舰输出价对比（每百万 token）</span>
+        <span class="stat__value">≈1/10<span class="unit">起</span></span>
+        <span class="stat__note">Claude Opus 5.5 输出 $20、GPT-5.2 输出 $14，GPT-6 宣布「定价减半」（未核实）[15]；国产旗舰主流档位普遍低一个数量级，DeepSeek Flash 档再降 60% [3]</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">开放权重阵营</span>
+        <span class="stat__value">8/10<span class="unit">家</span></span>
+        <span class="stat__note">Qwen、DeepSeek、GLM、Kimi、混元、MiniMax、星火、阶跃均开放旗舰级权重</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">国产最大参数规模</span>
+        <span class="stat__value">2.8<span class="unit">万亿</span></span>
+        <span class="stat__note">Kimi K3，且已开源——全球首个 3T 级开放权重模型 [7]；文心 5.0 与 Qwen3.8-Max 达 2.4 万亿</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">开源阵营差距</span>
+        <span class="stat__value">对标<span class="unit">Opus 4.5–4.6</span></span>
+        <span class="stat__note">GLM-5、Kimi K3、MiniMax M2.5、Qwen3.5 均以此口径发布；闭源前沿仍由 Claude / GPT-6 / Gemini 领跑 [13]</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= 一分钟速览 ================= -->
+<section class="section" id="overview">
+  <div class="section-head reveal">
+    <span class="eyebrow">一分钟速览</span>
+    <h2>现在的格局，三句话说完</h2>
+  </div>
+  <div class="prose reveal">
+    <p><strong>第一梯队已经形成，而且大多开源。</strong>DeepSeek、阿里通义 Qwen、智谱 GLM、月之暗面 Kimi、字节豆包这五家处于第一梯队：Qwen3.8-Max、Kimi K3、GLM-5.3、DeepSeek-V4.1 在编程、推理和智能体（Agent）任务上已对标 Claude Opus 4.5–4.6 档 [13]；最前沿的闭源模型（GPT-6、Claude Opus 5.5、Gemini 3.1）仍略微领先，但差距以「周」计。百度文心、腾讯混元、MiniMax、讯飞星火、阶跃星辰紧随其后，各有多模态或垂直场景的独门优势。</p>
+    <p><strong>开源是中国模型最大的战略筹码。</strong>十家主要厂商里八家开放了权重：Qwen 开源权重半年下载超 30 亿次、衍生模型超 15 万个，体量已超过 Meta 与 Google 的开源总和 [5]；Kimi K3 成为全球首个 3 万亿级开源模型，连美国公司 Cognition 都基于它训练了自己的编程模型 [8]。</p>
+    <p><strong>价格优势依然悬殊。</strong>Claude Opus 5.5 每百万 token 输出收 $20，GPT-5.2 收 $14，新旗舰 GPT-6 虽宣布「定价减半」仍约合 $7 [15]；国产旗舰主流档位普遍低一个数量级，DeepSeek V4.1 Flash 发布时还在 V4 基础上最高降价 60%，第三方测算其成本约为同档国产竞品的 1/7 [4]。「智能普惠」这件事，事实上正由中国模型推动。</p>
+    <p class="caption">以下每一节都附来源编号，对应文末「数据来源」一节；标注「待核实」表示公开来源尚不一致，本页宁缺毋滥。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 主要玩家 ================= -->
+<section class="section" id="players">
+  <div class="section-head reveal">
+    <span class="eyebrow">主要玩家</span>
+    <h2>十家厂商，各自主打什么</h2>
+    <p>按影响力与话题度排列，覆盖当前国产大模型的主流阵容。点标签可筛选开源 / 闭源。</p>
+  </div>
+
+  <div class="filter-row reveal" role="group" aria-label="筛选厂商卡片">
+    <button class="chip" data-filter="all" aria-pressed="true">全部</button>
+    <button class="chip" data-filter="open" aria-pressed="false">开放权重</button>
+    <button class="chip" data-filter="closed" aria-pressed="false">仅 API</button>
+  </div>
+
+  <div class="card-grid" id="cardGrid">
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">DeepSeek</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">深度求索 · 杭州</span>
+      <div class="card__flagship">
+        <b>DeepSeek-V4.1 Flash</b><br><time>2026-09-10 发布 [2][3]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>架构</dt><dd>全新 CED，原生视觉</dd>
+        <dt>上下文</dt><dd>V4 系列主打 100 万 token</dd>
+        <dt>价格</dt><dd>较 V4 最高降价 60% [3]</dd>
+      </dl>
+      <p class="desc">以极致工程效率闻名：2025 年 R1 引发全球「斯普特尼克时刻」，2026 年 V4 系列走「平价百万上下文」路线——7 月 Flash API、8 月 Pro API 并开源 DeepSeek Harness、9 月 V4.1 Flash，一步一档 [4]。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">通义 Qwen</span><span class="tag tag--open">开源为主</span>
+      </div>
+      <span class="card__org">阿里巴巴 · 杭州</span>
+      <div class="card__flagship">
+        <b>Qwen3.8-Max（闭源）+ Qwen3.5-Plus（开源）</b><br><time>2026-08-02 / 2026-02-16 [5]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>3.8-Max 达 2.4 万亿 MoE；开源旗舰 3.5-Plus 397B</dd>
+        <dt>上下文</dt><dd>3.5 中型系 256K 原生，可扩 100 万</dd>
+        <dt>生态</dt><dd>开源权重半年下载 30 亿+、衍生模型 15 万+，超越 Meta 与 Google 之和 [5]</dd>
+      </dl>
+      <p class="desc">全球开源生态的事实标准：覆盖 201 种语言，无数创业公司直接在 Qwen 底座上微调。闭源 Max 版冲击最强性能，开源系则统治全球开发者社区。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">GLM</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">智谱 AI · 北京</span>
+      <div class="card__flagship">
+        <b>GLM-5 → GLM-5.3</b><br><time>2026-02-12 发布 / 8 月升级 [6]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>745B（激活约 44B）</dd>
+        <dt>上下文</dt><dd>200K</dd>
+        <dt>定位</dt><dd>长程 Agent 与工程，官方对标 Claude Opus 4.5 [6]</dd>
+      </dl>
+      <p class="desc">「Agentic Engineering」路线的代表：GLM-5 发布即称开源 SOTA 级工程能力 [6]，5.3 靠纯后训练再提编程上限，稳坐开源第一梯队。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">Kimi</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">月之暗面 · 北京</span>
+      <div class="card__flagship">
+        <b>Kimi K3</b><br><time>2026-07-17 发布 [7]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>2.8 万亿（全球首个 3T 级开源）</dd>
+        <dt>架构</dt><dd>KDA 混合线性注意力，1M 上下文</dd>
+        <dt>战绩</dt><dd>2026-07-27 登顶 LMArena 前端代码 Arena [8]</dd>
+      </dl>
+      <p class="desc">长文本起家，如今押注智能体编程与知识工作——连美国公司 Cognition（Devin 母公司）都基于 K3 训练了自己的 SWE-2 模型 [8]。</p>
+    </article>
+
+    <article class="card" data-kind="closed">
+      <div class="card__top">
+        <span class="card__name">豆包</span><span class="tag tag--closed">API / 应用</span>
+      </div>
+      <span class="card__org">字节跳动 · 北京</span>
+      <div class="card__flagship">
+        <b>豆包大模型 2.0（Doubao-Seed-2.0）</b><br><time>2026-02-14 发布 [9]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>阵容</dt><dd>Pro / Lite / Mini / Code 四款</dd>
+        <dt>多模态</dt><dd>Seedance 2.0 视频 · Seedream 5.0 图像</dd>
+        <dt>用户</dt><dd>豆包 App 月活 3.82 亿，国内断层第一 [14]</dd>
+      </dl>
+      <p class="desc">背靠字节的产品与流量：日均 tokens 调用量一年增长超 500 倍 [9]，视频与图像生成（即梦、Seedream）同属国内第一梯队。</p>
+    </article>
+
+    <article class="card" data-kind="closed">
+      <div class="card__top">
+        <span class="card__name">文心 ERNIE</span><span class="tag tag--closed">API / 应用</span>
+      </div>
+      <span class="card__org">百度 · 北京</span>
+      <div class="card__flagship">
+        <b>文心 5.0（原生全模态）</b><br><time>2025-11-13 预览 / 2026-01 正式版 [10]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>2.4 万亿 · 原生全模态统一建模</dd>
+        <dt>能力</dt><dd>文本 / 图像 / 音频 / 视频理解与生成</dd>
+        <dt>战绩</dt><dd>曾为 LMArena 视觉榜 Top 10 中唯一中国模型 [10]</dd>
+      </dl>
+      <p class="desc">国内最早 All-in 大模型的大厂；5.0 起走「原生全模态」路线，后续版本以约 6% 的预训练成本实现同档领先 [11]，搜索与 Agent 深度绑定百度生态。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">混元</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">腾讯 · 深圳</span>
+      <div class="card__flagship">
+        <b>混元 3.0（Hy3）</b><br><time>2026-04-23 发布并开源 [12]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>开源</dt><dd>7 月初正式版上线；生图 HunyuanImage 3.0（80B）同源开放</dd>
+        <dt>生态</dt><dd>深度接入微信 / 元宝 / 腾讯会议</dd>
+      </dl>
+      <p class="desc">坐拥微信生态的独特分发位：元宝直接接入微信，混元 3D 与视频生成在游戏、内容行业有大量落地，主力文本模型也已开源。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">MiniMax</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">MiniMax 稀宇科技 · 上海</span>
+      <div class="card__flagship">
+        <b>MiniMax-M2.5</b><br><time>2026-02-12 发布 [12]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>10B 激活（极致稀疏）</dd>
+        <dt>战绩</dt><dd>SWE-bench Verified 80.2（第三方实测，半年前 M2 仅 69.4）[12]</dd>
+        <dt>多模态</dt><dd>海螺（Hailuo）视频生成全球出圈</dd>
+      </dl>
+      <p class="desc">用小激活参数做出顶级编程能力的「效率派」：M2 → M2.1 → M2.5 三代半年内把真实修 bug 成绩从 69.4 拉到 80.2，是开源阵营里性价比的另一种解法。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">星火 Spark</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">科大讯飞 · 合肥</span>
+      <div class="card__flagship">
+        <b>星火 X2.5</b><br><time>2026-09-07 发布 [12]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>293B（激活 30B，MoE）</dd>
+        <dt>特色</dt><dd>全国产算力训练；另有端侧 4B / 1.7B 版本</dd>
+        <dt>主场</dt><dd>教育 / 医疗 / 办公</dd>
+      </dl>
+      <p class="desc">「全国产算力」路线的代表——训练全程不依赖海外芯片，教育、医疗等 B 端渗透率最高，语音技术业内顶尖，2026 年 9 月新版同样选择开源。</p>
+    </article>
+
+    <article class="card" data-kind="open">
+      <div class="card__top">
+        <span class="card__name">Step 阶跃</span><span class="tag tag--open">开放权重</span>
+      </div>
+      <span class="card__org">阶跃星辰 · 上海</span>
+      <div class="card__flagship">
+        <b>Step 3</b><br><time>2025-07-31 开源 [12]</time>
+      </div>
+      <dl class="card__spec">
+        <dt>参数</dt><dd>321B（激活 38B）</dd>
+        <dt>特色</dt><dd>原生多模态推理；官方称国产芯片推理效率最高达同类三倍</dd>
+      </dl>
+      <p class="desc">创业公司里的技术流：Step 3 把视觉与推理统一在一个开源 MoE 底座里，与智能终端厂商合作紧密，是「软硬协同」路线的代表。</p>
+    </article>
+
+  </div>
+  <p class="caption" style="margin-top:var(--s-4)">注：另有百川智能、零一万物、面壁智能等，2025 下半年以来未见可靠的新旗舰信息，篇幅所限未单列。发布潮背景：2026 年 2 月 11–16 日数日间（含除夕），GLM-5、MiniMax M2.5、豆包 2.0、Qwen3.5 等十余款模型集中上线 [12]。</p>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 中外对比 ================= -->
+<section class="section" id="versus">
+  <div class="section-head reveal">
+    <span class="eyebrow">中外对比</span>
+    <h2>八款旗舰，一张表看懂</h2>
+    <p>左边橙线是中国模型，右边灰线是海外模型。价格为官方 API 标准档每百万 token（输入 / 输出，人民币按 1 USD ≈ 7.1 CNY 换算）；「待核实」表示公开来源尚不一致，本页不填数。</p>
+  </div>
+
+  <div class="legend reveal">
+    <span class="key"><span class="swatch"></span>中国模型</span>
+    <span class="key"><span class="swatch swatch--us"></span>海外模型</span>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>模型</th><th>发布</th><th>参数规模</th><th>上下文</th>
+          <th>API 价格（¥ / 百万 token，入/出）</th><th>权重</th><th>一句话定位</th>
+        </tr>
+      </thead>
+      <tbody id="compareBody">
+        <tr class="cn">
+          <td><span class="m">DeepSeek-V4.1 Flash</span><small>深度求索</small></td>
+          <td class="num">2026-09-10</td><td>未公开（CED 新架构）</td><td class="num">1M（V4 系）</td>
+          <td class="num">较 V4 降 60%，官方页待核实 [2][3]</td><td>开源</td>
+          <td>平价百万上下文 + 原生视觉</td>
+        </tr>
+        <tr class="cn">
+          <td><span class="m">Qwen3.8-Max</span><small>阿里</small></td>
+          <td class="num">2026-08-02</td><td>2.4T MoE</td><td class="num">待核实</td>
+          <td class="num">待核实 [5]</td><td>闭源（开源系 3.5-Plus 397B）</td>
+          <td>阿里闭源旗舰；开源生态全球第一</td>
+        </tr>
+        <tr class="cn">
+          <td><span class="m">GLM-5.3</span><small>智谱</small></td>
+          <td class="num">2026-08</td><td>745B / A44B</td><td class="num">200K</td>
+          <td class="num">待核实 [6]</td><td>开源（5.0 已开放）</td>
+          <td>开源 Agent / 工程 SOTA，对标 Opus 4.5</td>
+        </tr>
+        <tr class="cn">
+          <td><span class="m">Kimi K3</span><small>月之暗面</small></td>
+          <td class="num">2026-07-17</td><td>2.8T MoE</td><td class="num">1M</td>
+          <td class="num">待核实 [7]</td><td>开源（全球首个 3T 级）</td>
+          <td>前端代码 Arena 开源第一</td>
+        </tr>
+        <tr class="cn">
+          <td><span class="m">MiniMax-M2.5</span><small>MiniMax</small></td>
+          <td class="num">2026-02-12</td><td>10B 激活</td><td class="num">待核实</td>
+          <td class="num">待核实 [12]</td><td>开源</td>
+          <td>SWE-bench Verified 80.2（第三方实测）</td>
+        </tr>
+        <tr class="us">
+          <td><span class="m">GPT-6 Sol / Luna</span><small>OpenAI</small></td>
+          <td class="num">2026-09-22</td><td>未公开</td><td class="num">待核实</td>
+          <td class="num">「定价减半」≈$7 出（报道推算，未核实）[15]</td><td>闭源</td>
+          <td>OpenAI 现役旗舰；前代 GPT-5.2 为 $1.75 / $14</td>
+        </tr>
+        <tr class="us">
+          <td><span class="m">Claude Opus 5.5</span><small>Anthropic</small></td>
+          <td class="num">2026-09-22</td><td>未公开</td><td class="num">1M</td>
+          <td class="num">≈¥28 / ¥142（$4 / $20）[15]</td><td>闭源</td>
+          <td>AA 智能指数现榜首</td>
+        </tr>
+        <tr class="us">
+          <td><span class="m">Gemini 3.1 Pro</span><small>Google</small></td>
+          <td class="num">2026-02-19（预览）</td><td>未公开</td><td class="num">待核实</td>
+          <td class="num">待核实</td><td>闭源</td>
+          <td>多模态与超长上下文</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption" style="margin-top:var(--s-4)">同场还有：xAI Grok 4.1（在售，Grok 5 训练中）；Meta 已放弃 Llama 数字系列，转向闭源 Muse Spark 与开源 Muse Glimmer 30B（Apache 2.0）[15]——全球开源格局里，留下的空位正由中国模型填补。</p>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 跑分 ================= -->
+<section class="section" id="bench">
+  <div class="section-head reveal">
+    <span class="eyebrow">跑分与榜单</span>
+    <h2>数据说话：中国模型处在什么位置</h2>
+    <p>只画有可靠来源的数字——每一根柱子都标了出处与测试时点；找不到可靠来源的榜单，用文字快照交代。</p>
+  </div>
+
+  <div class="prose reveal" style="margin-bottom:var(--s-6)">
+    <h3>开源编程模型的半年进化：MiniMax 三代</h3>
+    <p class="caption">SWE-bench Verified：给模型一个真实 GitHub 仓库的 issue，看它能否提交通过测试的修复。第三方实测（302.ai / 魔搭，2026-02）[12]。</p>
+  </div>
+  <div class="chart reveal" id="sweChart"><!-- 由 JS 渲染 --></div>
+
+  <div class="prose reveal" style="margin-top:var(--s-8);margin-bottom:var(--s-6)">
+    <h3>谁在真正被使用：国内 AI 原生应用月活</h3>
+    <p class="caption">QuestMobile 2026 年 6 月数据 [14]：国内 AI 原生 App 总月活 4.99 亿，同比 +85.4%。千问的暴涨源于品牌从「通义」切换，DeepSeek 下滑源于竞争分流。</p>
+  </div>
+  <div class="chart reveal" id="userChart"><!-- 由 JS 渲染 --></div>
+
+  <div class="prose reveal" style="margin-top:var(--s-8)">
+    <h3>2026 年 9 月榜单快照</h3>
+    <ul>
+      <li><strong>Artificial Analysis 智能指数</strong>（2026-09-07 v4.3）：前二为 Claude Fable 5.1 与 GPT-6 Astra；9 月 22 日 Claude Opus 5.5 发布即登顶 [13]。中国侧 Kimi K3、GLM-5.3、DeepSeek V4.1 Flash 在榜。</li>
+      <li><strong>LMArena 文本总榜</strong>（2026-09-17 快照）：第一为 Claude Fable 5 [13]；千问 qwen3.8-max Elo ≈ 1671 [13]。</li>
+      <li><strong>开源侧高光</strong>：Kimi K3 (Max) 于 2026-07-27 登顶 LMArena 前端代码 Arena [8]；GLM-5 发布即称开源 SOTA 级工程能力 [6]。</li>
+      <li><strong>总体格局</strong>：开源阵营的中国模型已「对标 / 直逼」Claude Opus 4.5–4.6 档；闭源前沿（SWE / GPQA / AIME 综合）仍由 Claude、GPT-6、Gemini 领跑 [13]。</li>
+    </ul>
+    <p class="caption">读榜提示：跑分只代表测试口径内的表现，不同榜单侧重不同（有的重推理、有的重风格偏好），请结合场景看待。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 价格 ================= -->
+<section class="section" id="price">
+  <div class="section-head reveal">
+    <span class="eyebrow">价格对比</span>
+    <h2>同样一笔预算，能用多少「脑力」</h2>
+    <p>比旗舰输出价（每百万 token，2026-09，未计缓存与批量折扣）：Opus 5.5 与 GPT-5.2 用官方挂牌价；GPT-6 官方尚未公布单价，按其「定价减半」报道推算并明确标注。国产多数厂商未公开可比单价，故不画柱、只在文字里交代量级。</p>
+  </div>
+  <div class="chart reveal" id="priceChart"><!-- 由 JS 渲染 --></div>
+  <div class="prose reveal" style="margin-top:var(--s-6)">
+    <p><strong>怎么读这张图：</strong>Anthropic 对 Claude Opus 5.5 的输出收 $20 / 百万 token，OpenAI 对 GPT-5.2 收 $14，而新旗舰 GPT-6 宣布「定价减半」（约合 $7，官方单价页待核实）[15]；DeepSeek V4.1 Flash 发布时在 V4 基础上最高降价 60%，第三方测算其成本约为同档国产竞品（Kimi / GLM）的 1/7 [4]——换算下来，即便按减半后的 GPT-6 价格计，国产旗舰的输出价格也普遍再低数倍，<strong>Flash 档差距达一个数量级</strong>。</p>
+    <p><strong>换一种感受：</strong>用 Claude Opus 5.5 输出 1 亿 token 约需 1.4 万元人民币；这个预算在国产旗舰档位上通常能买到十倍量级的调用量。对以 token 计价的 Agent 工作流来说，这个差距直接决定了「跑不跑得起」。</p>
+    <p class="caption">海外厂商亦有批量折扣与缓存价，实际账单因负载而异；此处只比标准挂牌价，国产单价以各家官网实时页为准。</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 开源生态 ================= -->
+<section class="section" id="oss">
+  <div class="section-head reveal">
+    <span class="eyebrow">开源生态</span>
+    <h2>中国模型，成了全球开源底座</h2>
+  </div>
+  <div class="prose reveal">
+    <p>如果说 2023 年全球开源大模型的旗帜是 Llama，那么 2026 年这面旗帜已经交到了中国模型手里——连 Meta 都在 2026 年放弃 Llama 数字系列、转向闭源与开源并行的 Muse 系列 [15]。Hugging Face 官方发布的《State of Open Models》（2026-08）直接确认：中国模型主导着全球开源生态 [5]。</p>
+    <p>几个标志性事实：<strong>Qwen</strong> 开源权重半年下载超 30 亿次、衍生模型超 15 万个，超过 Meta 与 Google 的开源体量之和 [5]；<strong>Kimi K3</strong> 成为全球首个 3 万亿级开源模型，美国公司 Cognition（Devin 母公司）基于它训练了自己的编程模型 [8]；<strong>DeepSeek</strong> 把「平价百万上下文」做成开源系列，<strong>GLM、混元、MiniMax、星火、阶跃</strong>全部开放了旗舰级权重。</p>
+    <p>这件事的实际影响：任何一家公司、乃至任何一个学生，都能在自己笔记本或一台租来的显卡上，跑起一个世界前沿水平的模型——这在闭源主导的世界里不可想象。开源，是中国 AI 最确定的比较优势。</p>
+  </div>
+  <div class="stat-row reveal" style="margin-top:var(--s-6)">
+    <div class="stat">
+      <span class="stat__label">Qwen 开源权重下载（半年）</span>
+      <span class="stat__value">30亿+<span class="unit">次</span></span>
+      <span class="stat__note">阿里 2026-08-15 官宣，已超 Meta 与 Google 之和 [5]</span>
+    </div>
+    <div class="stat">
+      <span class="stat__label">Qwen 衍生模型</span>
+      <span class="stat__value">15万+<span class="unit">个</span></span>
+      <span class="stat__note">全球开源社区基于 Qwen 微调的模型总量 [5]</span>
+    </div>
+    <div class="stat">
+      <span class="stat__label">开源旗舰规模上限</span>
+      <span class="stat__value">2.8<span class="unit">万亿</span></span>
+      <span class="stat__note">Kimi K3——全球首个 3T 级开放权重模型 [7]</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 时间线 ================= -->
+<section class="section" id="timeline">
+  <div class="section-head reveal">
+    <span class="eyebrow">时间线</span>
+    <h2>从「百模大战」到世界第一梯队</h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <time>2022.11</time>
+      <h3>ChatGPT 引爆全球</h3>
+      <p>中国的大模型创业潮自此启动，两个月内数十家团队宣布入场。</p>
+    </div>
+    <div class="tl-item">
+      <time>2023</time>
+      <h3>「百模大战」</h3>
+      <p>百度文心一言、阿里通义千问、智谱 ChatGLM 等相继对公众开放；全国官宣的大模型一度超过两百个。</p>
+    </div>
+    <div class="tl-item">
+      <time>2024</time>
+      <h3>价格战与开源崛起</h3>
+      <p>DeepSeek-V2 把 API 价格打到千金级，Qwen 开源矩阵成型，多模态成为标配。</p>
+    </div>
+    <div class="tl-item">
+      <time>2025.01</time>
+      <h3>DeepSeek「斯普特尼克时刻」</h3>
+      <p>DeepSeek-R1 以极低训练成本对齐 OpenAI o1 推理性能并开源，硅谷震动，全球重估中国 AI 的工程能力 [1]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2025.11</time>
+      <h3>前沿竞争白热化</h3>
+      <p>Claude Opus 4.5（11-24）与百度文心 5.0 预览版（11-13）同月亮相 [10][15]；12 月 Gemini 3 Pro 发布 [15]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.02</time>
+      <h3>国产「发布周」</h3>
+      <p>2 月 11–16 日：MiniMax M2.5、GLM-5（745B 开源）、豆包 2.0、Qwen3.5-Plus（除夕）密集上线；Anthropic 同月发布 Opus 4.6，Google 2-19 放出 Gemini 3.1 Pro 预览 [5][6][9][12][15]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.07 – 08</time>
+      <h3>开源旗帜易主</h3>
+      <p>Kimi K3（2.8T）开源并登顶前端代码 Arena；Claude Opus 5（7-24）；DeepSeek V4 双版本与 Qwen3.8-Max（2.4T）、GLM-5.3 相继落地；Qwen 官宣下载量超越 Meta 与 Google 之和 [3][5][6][8][15]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.09</time>
+      <h3>GPT-6 与「平价百万上下文」</h3>
+      <p>DeepSeek V4.1 Flash（9-10）、星火 X2.5（9-07）开源；9-22 一天之内 OpenAI 发布 GPT-6 Sol / Luna、Anthropic 发布 Opus 5.5 [2][13][15]。</p>
+    </div>
+    <div class="tl-item mute">
+      <time>2026.09.27</time>
+      <h3>现在</h3>
+      <p>你正在阅读的这一刻：国产模型在开源生态、性价比、中文场景上优势明确；最前沿的闭源推理能力仍在与海外头部拉锯。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 怎么选 ================= -->
+<section class="section" id="guide">
+  <div class="section-head reveal">
+    <span class="eyebrow">选型指南</span>
+    <h2>不同需求，从哪一家下手</h2>
+    <p>面向普通用户的经验性建议（非广告，按 2026-09 公开能力与口碑归纳）。</p>
+  </div>
+  <div class="pick">
+    <div class="card reveal">
+      <h3>日常问答 · 写作</h3>
+      <p class="rec">推荐：<b>豆包 / Kimi / 千问 App</b></p>
+      <p>免费好用、中文语感自然：豆包胜在用户基数与语音生态（月活 3.82 亿）[14]，Kimi 胜在长文档与深度搜索，千问胜在办公套件联动。</p>
+    </div>
+    <div class="card reveal">
+      <h3>编程 · 智能体开发</h3>
+      <p class="rec">推荐：<b>Kimi K3 / GLM-5.3 / MiniMax-M2.5</b></p>
+      <p>K3 登顶前端代码 Arena、M2.5 实测 SWE-bench 80.2、GLM-5.3 主打长程 Agent [6][8][12]；预算充足可搭配 Claude Opus 5.5 做交叉验证。</p>
+    </div>
+    <div class="card reveal">
+      <h3>本地部署 · 数据不出域</h3>
+      <p class="rec">推荐：<b>Qwen3.5 / DeepSeek-V4 / Step 3</b></p>
+      <p>尺寸覆盖端侧 1.7B（星火）到 2.8T（K3），协议宽松、社区教程最全；要全国产软硬件栈可看星火 X2.5 与 Step 3。</p>
+    </div>
+    <div class="card reveal">
+      <h3>企业 API · 成本敏感</h3>
+      <p class="rec">推荐：<b>DeepSeek-V4.1 Flash / 豆包 Pro / GLM-5.3</b></p>
+      <p>国内合规与发票友好，价格约为海外旗舰的 1/10 上下 [3][15]；多模态需求看豆包与文心，百万长文本看 DeepSeek 与 Kimi。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 来源 ================= -->
+<section class="section" id="refs">
+  <div class="section-head reveal">
+    <span class="eyebrow">数据来源与说明</span>
+    <h2>本页所有关键数字的出处</h2>
+  </div>
+  <div class="disclaimer reveal" style="margin-bottom:var(--s-6)">
+    <strong>请带着时效意识阅读：</strong>大模型行业以「周」为单位迭代，本页数据截至 <strong>2026 年 9 月 27 日</strong>，均来自公开报道与官方页面；标注「待核实」的字段表示公开来源尚不一致，为避免误导暂不填数。价格随时可能调整，以各家官网为准。
+  </div>
+  <ol class="refs reveal" id="refList"><!-- 由 JS 渲染来源列表 --></ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>国产大模型全景 · 一页数据手册 · 数据截至 2026-09</span>
+    <span>用 HTML + CSS 手工排印，无跟踪、无外部依赖（字体加载失败时自动回退系统字体）。渲染于你的浏览器。</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- 导航滚动态 ---------- */
+const nav = document.querySelector('.nav');
+addEventListener('scroll', () => nav.toggleAttribute('data-scrolled', scrollY > 8), {passive:true});
+
+/* ---------- 卡片筛选 ---------- */
+const chips = document.querySelectorAll('.chip');
+const cards = document.querySelectorAll('#cardGrid .card');
+chips.forEach(chip => chip.addEventListener('click', () => {
+  chips.forEach(c => c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'));
+  const f = chip.dataset.filter;
+  cards.forEach(card => {
+    const show = f === 'all' || card.dataset.kind === f;
+    card.style.display = show ? '' : 'none';
+  });
+}));
+
+/* ---------- 条形图渲染 ---------- */
+/* color: 'cn' 中国橙 / 'us' 海外灰。scale 以图表最大值为 100% 基准。 */
+function renderChart(id, items, {max, unit='', unitPre='', suffix=''}) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = max || Math.max(...items.map(i => i.v));
+  el.innerHTML = items.map(it => {
+    const pct = Math.max(2, Math.min(100, it.v / top * 100));
+    const val = typeof it.v === 'number'
+      ? (Number.isInteger(it.v) ? it.v : (it.v < 10 ? it.v.toFixed(2) : it.v.toFixed(1)))
+      : it.v;
+    return `<div class="bar-row">
+      <span class="label">${it.label}</span>
+      <div class="bar-track">
+        <div class="bar-fill bar-fill--${it.color}" style="width:${pct}%"></div>
+        <span class="bar-val" style="left:${pct}%">${unitPre}${val}${unit}${it.note ? ' · ' + it.note : ''}${suffix}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* SWE-bench Verified：MiniMax 三代开源模型的半年进化（第三方实测 302.ai，2026-02）[12] */
+renderChart('sweChart', [
+  {label:'MiniMax-M2（2025）',    v:69.4, color:'cn'},
+  {label:'MiniMax-M2.1',          v:74.0, color:'cn'},
+  {label:'MiniMax-M2.5（2026-02）', v:80.2, color:'cn', note:'半年 +10.8'},
+], {max:100, unit:'%'});
+
+/* 国内 AI 原生应用月活（QuestMobile，2026-06）[14] */
+renderChart('userChart', [
+  {label:'豆包',      v:3.82, color:'cn', note:'断层第一'},
+  {label:'千问',      v:1.67, color:'cn', note:'品牌切换带动'},
+  {label:'DeepSeek', v:1.30, color:'cn', note:'竞争分流'},
+], {max:4.2, unit:' 亿'});
+
+/* API 输出价格：¥ / 百万 token（2026-09；Opus / GPT-5.2 为官方挂牌价，GPT-6 按「定价减半」报道推算）[15][16] */
+renderChart('priceChart', [
+  {label:'Claude Opus 5.5 🇺🇸',  v:142, color:'us', note:'$20 · 官方价'},
+  {label:'GPT-6 Sol / Luna 🇺🇸', v:50,  color:'us', note:'≈$7 · 按「定价减半」报道推算，官方未核实'},
+  {label:'GPT-5.2（前代）🇺🇸',    v:99,  color:'us', note:'$14 · 官方价'},
+  {label:'DeepSeek V4-Flash 🇨🇳', v:2,   color:'cn', note:'2026-07 报道档，V4.1 再降'},
+], {max:160, unitPre:'¥'});
+
+/* ---------- 数据来源 ---------- */
+const REFS = [
+  {t:'维基百科（中文）：DeepSeek — R1 与「斯普特尼克时刻」', u:'https://zh.wikipedia.org/wiki/DeepSeek'},
+  {t:'DeepSeek 官方公告：V4.1 Flash 发布（2026-09-10）', u:'https://api-docs.deepseek.com/zh-cn/news/news260910'},
+  {t:'IT之家：DeepSeek V4.1 Flash 发布，较 V4 最高降价 60%（2026-09-10）', u:'https://www.ithome.com/1/000/719.htm'},
+  {t:'KuCoin News：第三方测算 V4.1 Flash 成本约为 Kimi / GLM 的 1/7（2026-09-11）', u:'https://www.kucoin.com/news/flash/deepseek-v4-1-flash-third-party-test-not-top-domestic-model-but-costs-1-7-of-kimi-and-glm'},
+  {t:'阿里云官方：Qwen3.8-Max 发布（2.4T）；Qwen 开源权重半年下载 30 亿+、衍生模型 15 万+（2026-08）；Hugging Face《State of Open Models》', u:'https://www.alibabacloud.com/en/press-room/alibaba-unveils-qwen3-8-max', u2:'https://huggingface.co/blog/state-of-open-models-summer-2026'},
+  {t:'36 氪：智谱 GLM-5 发布，开源 SOTA 级工程能力（2026-02-12）；智谱开放平台 GLM-5.3 文档', u:'https://m.36kr.com/p/3679611307617928', u2:'https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3'},
+  {t:'21 财经：Kimi K3 发布，2.8 万亿参数、全球首个 3T 级开源（2026-07-17）', u:'https://www.21jingji.com/article/20260717/herald/eaf951305f96c24cb419247dba7899d2.html'},
+  {t:'LMArena 官方：Kimi K3 (Max) 登顶前端代码 Arena（2026-07-27）；Cognition 基于 K3 训练 SWE-2（2026-09）', u:'https://www.linkedin.com/posts/arenaai_in-frontend-code-arena-kimi-k3-max-by-activity-7487572308430266368-HS59', u2:'https://fanweibin.cn/posts/2026-09-14-cognition-swe-2-kimi-k3-agent-coding-jiagou-jiexi'},
+  {t:'字节 Seed 官方博客：豆包大模型 2.0 发布（2026-02-14）；火山引擎：日均 tokens 增长超 500 倍', u:'https://seed.bytedance.com/zh/blog/seed2-0-正式发布'},
+  {t:'文心官方博客：ERNIE 5.0（2025-11-13 预览，2026-01 正式版）；LMArena 视觉榜 Top 10 唯一中国模型', u:'https://ernie.baidu.com/blog/zh/posts/ernie5.0', u2:'https://ernie.baidu.com/blog/zh/posts/ernie-5.0-0110-release-on-lmarena'},
+  {t:'ERNIE 官方博客：5.1 以约 6% 预训练成本实现同档领先', u:'https://ernie.baidu.com/'},
+  {t:'2026 春季发布潮与实测：302.ai 实测 MiniMax M2.5 SWE-bench 80.2；21 财经：混元 3.0 发布并开源（2026-04-23）；新华网：星火 X2.5（2026-09-07）；InfoQ：Step 3 开源；腾讯新闻：Qwen3.5 除夕发布', u:'https://302.ai/blog/302-ai-benchmark-lab-review-on-minimax-m2-5', u2:'https://www.21jingji.com/article/20260423/herald/e093a839bce442c14fc65bc2bf87545d.html'},
+  {t:'榜单：Artificial Analysis 智能指数 v4.3（2026-09-07）与 Opus 5.5 登顶（09-22）；BenchLeader：LMArena 文本总榜快照（09-17）；Arena：qwen3.8-max Elo ≈1671', u:'https://artificialanalysis.ai/articles/claude-opus-5-5', u2:'https://www.benchleader.com/benchmarks/lmarena_text'},
+  {t:'QuestMobile：2026-06 国内 AI 原生 App 月活 4.99 亿，豆包 3.82 亿 / 千问 1.67 亿 / DeepSeek 1.30 亿；金融界报道', u:'https://www.questmobile.com.cn/research/report/2046482337382842370/', u2:'https://finance.jrj.com.cn/2026/07/14112457788881.shtml'},
+  {t:'海外阵营：TechCrunch：OpenAI 发布 GPT-6 Sol / Luna（2026-09-22）；Anthropic：Opus 5.5（$4/$20，1M）；Google：Gemini 3；VentureBeat：Meta 转向 Muse 系列', u:'https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/', u2:'https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5', u3:'https://venturebeat.com/technology/goodbye-llama-meta-launches-new-proprietary-ai-model-muse-spark-first-since'},
+  {t:'Pandaily：DeepSeek-V4-Flash 官方版开源，304B，$0.14/$0.28（2026-07）', u:'https://pandaily.com/deepseek-v4-flash-official-open-source-jul2026'},
+];
+document.getElementById('refList').innerHTML = REFS.map((r,i) => {
+  const links = ['u','u2','u3'].map(k => r[k] ? `<a href="${r[k]}" target="_blank" rel="noopener">${new URL(r[k]).hostname.replace('www.','')}</a>` : '').filter(Boolean).join(' · ');
+  return `<li>[${i+1}] ${r.t}　${links}</li>`;
+}).join('');
+
+/* ---------- 滚动淡入 ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+}, {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
