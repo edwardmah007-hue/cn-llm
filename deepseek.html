@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek 现状与最新模型 2026 —— V4.1-Flash-1017 一页看懂</title>
+<meta name="description" content="DeepSeek（深度求索）2026 年现状档案：公司融资与 IPO、算力布局、V4.1-Flash-1017 最新模型、跑分、价格、模型谱系与争议。数据截至 2026-10，全部标注来源。">
+<meta property="og:title" content="DeepSeek 现状与最新模型 2026">
+<meta property="og:description" content="一家 160 人的公司，把前沿智能做成了平价品。V4.1-Flash-1017 最新模型、跑分、价格与争议，一页看懂。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://edwardmah007-hue.github.io/cn-llm/deepseek.html">
+<meta property="og:image" content="https://edwardmah007-hue.github.io/cn-llm/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8552f'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23faf9f7' font-family='serif'%3E%E6%B7%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   tokens — 明亮编辑风：暖白纸底、衬线标题、一个朱砂橙强调色
+   ========================================================================== */
+:root{
+  --n-0:#ffffff; --n-50:#faf9f7; --n-100:#f4f2ee; --n-200:#e9e5df;
+  --n-300:#d6d0c7; --n-400:#a8a199; --n-500:#7d766d; --n-700:#46403a; --n-900:#1c1b19;
+  --bg:var(--n-50); --surface:var(--n-0); --ink:var(--n-900);
+  --ink-muted:var(--n-500); --line:var(--n-200);
+  --accent:#b8552f;                      /* 朱砂橙：全页唯一强调色 */
+  --accent-ink:#ffffff;
+  --accent-soft:color-mix(in srgb, var(--accent) 8%, var(--bg));
+  --ok:#3f7d5a; --warn:#9a6a12; --bad:#b0432f;
+  --font-serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",
+              "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC","Microsoft YaHei",monospace;
+  --t--1:clamp(0.80rem,0.77rem + 0.13vw,0.86rem);
+  --t-0:clamp(1.00rem,0.96rem + 0.19vw,1.09rem);
+  --t-1:clamp(1.19rem,1.12rem + 0.31vw,1.33rem);
+  --t-2:clamp(1.41rem,1.30rem + 0.50vw,1.66rem);
+  --t-3:clamp(1.68rem,1.50rem + 0.78vw,2.07rem);
+  --t-4:clamp(2.00rem,1.72rem + 1.19vw,2.59rem);
+  --t-5:clamp(2.37rem,1.95rem + 1.78vw,3.24rem);
+  --lh-tight:1.25; --lh-head:1.35; --lh-body:1.8; --lh-flat:1.15;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+  --r-1:4px; --r-2:8px; --r-3:12px; --r-4:16px; --r-pill:9999px;
+  --sh-2:0 1px 2px #08080808,0 2px 4px #0808080a,0 4px 8px #0808080d;
+  --ease:cubic-bezier(0.16,1,0.3,1); --dur:0.2s;
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-sans); font-size:17px; line-height:var(--lh-body);
+  font-synthesis:none; text-rendering:optimizeLegibility;
+}
+img,svg{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit}
+::selection{background:color-mix(in srgb,var(--accent) 25%,transparent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r-1)}
+
+/* ---------- 排版 ---------- */
+h1,h2,h3{font-family:var(--font-serif);font-weight:700;text-wrap:balance;letter-spacing:0}
+h1{font-size:var(--t-5);line-height:var(--lh-tight)}
+h2{font-size:var(--t-3);line-height:var(--lh-head)}
+h3{font-size:var(--t-1);line-height:var(--lh-head)}
+p,li{text-wrap:pretty;max-width:36em;letter-spacing:0}
+strong{font-weight:600}
+em{font-style:normal;font-weight:600}
+a{color:var(--accent);text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  transition:border-color var(--dur) var(--ease)}
+a:hover{border-bottom-color:var(--accent)}
+.num,time{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:var(--t--1);font-weight:600;letter-spacing:.12em;color:var(--accent)}
+.caption,.small{font-size:var(--t--1);color:var(--ink-muted);line-height:1.6}
+
+.wrap{max-width:72rem;margin-inline:auto;padding-inline:var(--s-4)}
+.prose{max-width:42em}
+.section{padding-block:var(--s-9)}
+.section-head{margin-bottom:var(--s-6)}
+.section-head .eyebrow{display:block;margin-bottom:var(--s-2)}
+.section-head h2{max-width:24em}
+.section-head p{margin-top:var(--s-3);color:var(--ink-muted)}
+hr.rule{border:0;border-top:1px solid var(--line);margin-block:0}
+
+/* ---------- 导航 ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:var(--s-5);
+  height:60px;padding-inline:var(--s-5);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--dur) var(--ease);
+}
+.nav[data-scrolled]{border-bottom-color:var(--line)}
+.nav__brand{font-family:var(--font-serif);font-weight:700;font-size:var(--t-1);
+  color:var(--ink);white-space:nowrap}
+.nav__brand small{display:block;font-family:var(--font-sans);font-weight:400;
+  font-size:var(--t--1);color:var(--ink-muted);letter-spacing:.06em}
+.nav__links{display:flex;gap:var(--s-1);margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav__links::-webkit-scrollbar{display:none}
+.nav__link{padding:6px 10px;border-radius:var(--r-1);color:var(--ink-muted);
+  white-space:nowrap;border-bottom:none;
+  transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease)}
+.nav__link:hover{color:var(--ink);background:var(--n-100)}
+.nav__badge{font-size:var(--t--1);color:var(--accent);border:1px solid
+  color-mix(in srgb,var(--accent) 35%,transparent);border-radius:var(--r-pill);
+  padding:4px 10px;white-space:nowrap}
+@media (max-width:820px){ .nav__badge{display:none} .nav__brand small{display:none} }
+
+/* ---------- Hero ---------- */
+.hero{padding-block:var(--s-8) var(--s-9);
+  background:
+    radial-gradient(60rem 24rem at 85% -10%, var(--accent-soft), transparent 65%);
+}
+.hero h1{margin-top:var(--s-4);max-width:18em}
+.hero .lede{margin-top:var(--s-4);font-size:var(--t-1);line-height:1.85;color:var(--n-700);max-width:34em}
+.hero-meta{margin-top:var(--s-5);display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--t--1);
+  color:var(--n-700);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:6px 12px}
+.pill b{font-weight:600;color:var(--ink)}
+.stat-row{margin-top:var(--s-7);display:grid;gap:var(--s-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-3);
+  padding:var(--s-4) var(--s-5);display:flex;flex-direction:column;gap:var(--s-1)}
+.stat__label{font-size:var(--t--1);color:var(--ink-muted)}
+.stat__value{font-family:var(--font-serif);font-size:var(--t-3);line-height:var(--lh-flat);
+  font-weight:700;font-variant-numeric:tabular-nums}
+.stat__value .unit{font-size:.55em;font-weight:600;color:var(--ink-muted);margin-left:2px}
+.stat__note{font-size:var(--t--1);color:var(--ink-muted);line-height:1.6}
+
+/* ---------- 卡片 ---------- */
+.card-grid{display:grid;gap:var(--s-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.card-grid--2{grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-4);
+  padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-3);
+  transition:border-color var(--dur) var(--ease)}
+.card:hover{border-color:var(--n-300)}
+.card h3{display:flex;align-items:center;gap:var(--s-2)}
+.card p{font-size:var(--t--1);color:var(--n-700);line-height:1.75}
+.card .card__k{font-family:var(--font-serif);font-size:var(--t-2);font-weight:700;
+  line-height:var(--lh-flat)}
+.card .card__k .unit{font-size:.5em;font-weight:600;color:var(--ink-muted);margin-left:3px}
+.card .card__sub{font-size:var(--t--1);color:var(--ink-muted);line-height:1.6}
+.tag{display:inline-block;font-size:var(--t--1);line-height:1;padding:5px 9px;
+  border-radius:var(--r-pill);white-space:nowrap;font-weight:600}
+.tag--accent{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface))}
+.tag--muted{color:var(--n-700);background:var(--n-100)}
+
+/* ---------- 表格 ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-4);
+  background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:var(--t--1);min-width:44rem}
+th,td{padding:12px var(--s-4);text-align:left;vertical-align:top;
+  border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;z-index:1;background:var(--n-100);font-weight:600;
+  color:var(--n-700);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--n-50)}
+td .m{font-weight:600;white-space:nowrap}
+td small{display:block;color:var(--ink-muted);margin-top:2px;font-weight:400}
+td.hl{color:var(--accent);font-weight:600}
+tr.now td{background:var(--accent-soft)}
+.table-note{margin-top:var(--s-3);font-size:var(--t--1);color:var(--ink-muted);max-width:52em}
+
+/* ---------- 条形图 ---------- */
+.chart{display:flex;flex-direction:column;gap:var(--s-3)}
+.bar-row{display:grid;grid-template-columns:12.5em 1fr auto;gap:var(--s-3);align-items:center}
+.bar-row .label{font-size:var(--t--1);color:var(--ink);text-align:right;line-height:1.4}
+.bar-track{position:relative;height:28px;background:var(--n-100);border-radius:var(--r-1)}
+.bar-fill{position:absolute;inset:0 auto 0 0;border-radius:var(--r-1);
+  background:var(--n-300);min-width:2px;transition:width .8s var(--ease)}
+.bar-fill--cn{background:color-mix(in srgb,var(--accent) 55%,var(--n-200))}
+.bar-fill--ds{background:var(--accent)}
+.bar-fill--us{background:var(--n-400)}
+.bar-val{font-size:var(--t--1);color:var(--n-700);white-space:nowrap;
+  font-variant-numeric:tabular-nums;text-align:right}
+@media (max-width:560px){
+  .bar-row{grid-template-columns:1fr auto}
+  .bar-row .label{grid-column:1/-1;text-align:left}
+}
+
+/* ---------- 时间线 ---------- */
+.timeline{position:relative;margin-left:.4em;padding-left:var(--s-6);
+  border-left:1px solid var(--n-300);display:flex;flex-direction:column;gap:var(--s-6)}
+.tl-item{position:relative;max-width:40em}
+.tl-item::before{content:"";position:absolute;left:calc(-1 * var(--s-6) - 5px);top:.55em;
+  width:9px;height:9px;border-radius:50%;background:var(--bg);
+  border:2px solid var(--accent)}
+.tl-item.mute::before{border-color:var(--n-300)}
+.tl-item time{display:block;font-size:var(--t--1);color:var(--accent);font-weight:600;
+  letter-spacing:.02em}
+.tl-item h3{margin:2px 0 var(--s-1)}
+.tl-item p{font-size:var(--t-0);color:var(--n-700);line-height:1.75}
+
+/* ---------- 双栏 ---------- */
+.two-col{display:grid;gap:var(--s-5);grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-4);
+  padding:var(--s-5)}
+.panel h3{display:flex;align-items:center;gap:var(--s-2);margin-bottom:var(--s-3)}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:var(--s-3)}
+.panel li{position:relative;padding-left:1.2em;font-size:var(--t--1);color:var(--n-700)}
+.panel li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;
+  border-radius:50%;background:var(--accent)}
+.panel--muted li::before{background:var(--n-400)}
+.panel li b{color:var(--ink);font-weight:600}
+
+/* ---------- 引言 / 结论 ---------- */
+.callout{background:var(--accent-soft);border:1px solid
+  color-mix(in srgb,var(--accent) 20%,transparent);border-radius:var(--r-3);
+  padding:var(--s-4) var(--s-5);font-size:var(--t-0);color:var(--n-700);max-width:52em}
+.callout strong{color:var(--ink)}
+blockquote{border-left:3px solid var(--accent);padding-left:var(--s-4);
+  font-family:var(--font-serif);font-size:var(--t-1);line-height:1.7;color:var(--n-700);
+  max-width:36em}
+blockquote cite{display:block;margin-top:var(--s-2);font-family:var(--font-sans);
+  font-size:var(--t--1);font-style:normal;color:var(--ink-muted)}
+
+/* ---------- 来源 ---------- */
+.refs{counter-reset:ref;display:flex;flex-direction:column;gap:var(--s-2)}
+.refs li{list-style:none;position:relative;padding-left:2.4em;font-size:var(--t--1);
+  color:var(--n-700);max-width:56em}
+.refs li::before{counter-increment:ref;content:"[" counter(ref) "]";
+  position:absolute;left:0;color:var(--accent);font-variant-numeric:tabular-nums}
+.disclaimer{background:var(--accent-soft);border:1px solid
+  color-mix(in srgb,var(--accent) 20%,transparent);border-radius:var(--r-3);
+  padding:var(--s-4) var(--s-5);font-size:var(--t--1);color:var(--n-700);max-width:52em}
+
+footer{border-top:1px solid var(--line);padding-block:var(--s-7);color:var(--ink-muted);
+  font-size:var(--t--1)}
+footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
+
+/* ---------- 动效 ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);
+    transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal.is-in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+@media print{ .nav{display:none} .section{padding-block:var(--s-6)} }
+</style>
+</head>
+<body>
+
+<!-- ================= 导航 ================= -->
+<nav class="nav" id="top">
+  <div class="nav__brand">DeepSeek 现状档案<small>DEEPSEEK · 2026</small></div>
+  <div class="nav__links">
+    <a class="nav__link" href="#status">现状</a>
+    <a class="nav__link" href="#timeline">时间线</a>
+    <a class="nav__link" href="#model">最新模型</a>
+    <a class="nav__link" href="#bench">跑分</a>
+    <a class="nav__link" href="#price">价格</a>
+    <a class="nav__link" href="#lineage">谱系</a>
+    <a class="nav__link" href="#reputation">口碑</a>
+    <a class="nav__link" href="#watch">看点</a>
+    <a class="nav__link" href="#refs">来源</a>
+  </div>
+  <span class="nav__badge">数据截至 2026-10</span>
+</nav>
+
+<!-- ================= Hero ================= -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">DEEPSEEK · 2026 年 10 月 · 一页现状档案</span>
+    <h1>一家 160 人的公司，<br>把前沿智能做成了平价品</h1>
+    <p class="lede">2025 年 1 月，R1 让全球第一次正视中国模型的工程效率；2026 年，V4 系列把百万上下文拉进一元档，V4.1 Flash 又用一套非对称架构把推理成本再砍一刀。DeepSeek 不追最贵的那条路——它追的是单位智能的成本。这一页讲清：它现在是什么样、最新模型强在哪，以及代价是什么。</p>
+    <div class="hero-meta">
+      <span class="pill">🧠 <b>V4.1-Flash-1017</b> · 2026-10-17 更新</span>
+      <span class="pill">🧩 552B MoE · 输入激活 8B / 输出 16B</span>
+      <span class="pill">📜 1M 上下文 · MIT 开放权重</span>
+      <span class="pill">🥇 Terminal-Bench 2.1 第一 [13]</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat__label">投后估值</span>
+        <span class="stat__value">$52B</span>
+        <span class="stat__note">2026-05 完成 70 亿美元 A 轮；7 月起筹备 IPO，最早 2027 年 [8]</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">App 月活</span>
+        <span class="stat__value">1.30<span class="unit">亿</span></span>
+        <span class="stat__note">2026-06 QuestMobile 口径；国内 AI 原生应用第三，落后豆包、千问 [14][15]</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">输出价 · 每百万 token</span>
+        <span class="stat__value">¥4</span>
+        <span class="stat__note">闲时价；高峰 ¥8，缓存命中输入低至 ¥0.02 [4]</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">GitHub 星标</span>
+        <span class="stat__value">25.7<span class="unit">万</span></span>
+        <span class="stat__note">DeepSeek Harness，8 月开发者预览，MIT 协议 [10][11]</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= 现状 ================= -->
+<section class="section" id="status">
+  <div class="section-head reveal">
+    <span class="eyebrow">01 · 现状</span>
+    <h2>它更像一家研究所，只是恰好做出了最好的模型</h2>
+  </div>
+  <div class="prose reveal">
+    <p><strong>公司底色是「研究优先」。</strong>DeepSeek（杭州深度求索）2023 年 7 月由梁文锋创立，由量化基金幻方孵化，团队约 160 人（2025 年 FT 报道口径）[8]。它长期公开表示不急于商业化，C 端 App 与网页版免费、不限提问次数 [9]。2026 年 5 月，公司完成 70 亿美元 A 轮、投后估值 520 亿美元；7 月传出筹备 IPO、最早 2027 年上市，新一轮融资按 700 亿美元 pre-money 洽谈 [8]。</p>
+    <p><strong>算力是它最硬的约束，也是它最深的护城河。</strong>在美国芯片出口管制下，DeepSeek 一直靠算法效率对冲硬件劣势。2026 年 9 月，Bloomberg 报道其计划在内蒙古部署一座含 16 万颗华为昇腾 950DT 的数据中心；V4 系列也已被华为、寒武纪等国产芯片厂商采用 [8]。这条「国产芯片 + 国产模型」的闭环，是它和硅谷公司最大的结构性差异。</p>
+    <p><strong>产品线已经铺成三层。</strong>面向普通用户的免费 App / 网页版；面向开发者的 API（现役模型名 <code>deepseek-flash</code>、<code>deepseek-v4-pro</code>）[4][5]；以及 2026 年 8 月以 MIT 协议开源的 DeepSeek Harness——一个「一切皆插件」的智能体框架，GitHub 已收 25.7 万星 [10][11]。权重侧，V4 与 V4.1 全部 MIT 开源 [2][7]。</p>
+    <p><strong>地缘政治已经成为叙事的一部分。</strong>2026 年 2 月，Anthropic 指控 DeepSeek 使用数万个虚假账号生成对话、用于训练自家模型 [8]；10 月 20 日，美国禁止联邦民事机构使用 DeepSeek 产品 [8]。这两件事都不影响模型能力，却会影响它在海外市场的天花板。</p>
+  </div>
+
+  <div class="card-grid card-grid--2 reveal" style="margin-top:var(--s-6)">
+    <div class="card">
+      <span class="tag tag--accent">预训练</span>
+      <span class="card__k">32T<span class="unit">tokens</span></span>
+      <p>V4 系列的预训练数据量；官方称在 1M 上下文下仍保持可用推理效率 [9][16]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--accent">工程</span>
+      <span class="card__k">437×<span class="unit">KV Cache 缩减</span></span>
+      <p>从初代模型到 V4.1，上下文缓存的累计压缩倍数；对 HBM 的需求降到上一代的 1/4 [2]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--accent">部署</span>
+      <span class="card__k">2,000<span class="unit">卡起</span></span>
+      <p>官方给出的私有化部署参考门槛：2k 卡 GPU + 存储集群，即可承接 V4.1 Flash 的大规模推理 [2]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--accent">算力</span>
+      <span class="card__k">16<span class="unit">万颗昇腾</span></span>
+      <p>内蒙古数据中心规划的华为昇腾 950DT 数量（Bloomberg，2026-09）；落地进度待核实 [8]。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 时间线 ================= -->
+<section class="section" id="timeline">
+  <div class="section-head reveal">
+    <span class="eyebrow">02 · 2026 时间线</span>
+    <h2>十二个月，五次换挡</h2>
+    <p>从 V4 预览到 V4.1-Flash-1017，DeepSeek 在 2026 年几乎每两个月就重写一次自己的性价比曲线。</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <time>2026.04.24</time>
+      <h3>V4 预览：百万上下文 + MIT</h3>
+      <p>V4-Pro 1.6T 参数（49B 激活）、V4-Flash 284B（13B 激活），双双支持 1M token 上下文，MIT 开源；官方称之为「百万上下文普惠」[3][9][16]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.05</time>
+      <h3>70 亿美元 A 轮，投后 520 亿美元</h3>
+      <p>估值从 4 月传出的 100 亿美元一路抬升到 520 亿美元；同期梁文锋通过两层壳公司持股 84% 的结构被披露 [8]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.07</time>
+      <h3>筹备 IPO；V4-Flash 正式版</h3>
+      <p>Bloomberg、FT 报道公司已启动上市准备，最早 2027 年登陆；新一轮融资按 700 亿美元 pre-money 洽谈。7 月 31 日 V4-Flash 正式版上线 [8]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.08</time>
+      <h3>V4-Pro 正式版；Harness 开发者预览</h3>
+      <p>8 月 13 日 V4-Pro 正式开放 API；DeepSeek Harness 以 MIT 协议开源，主打「一切皆插件」的 Cordis 架构 [8][11]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.09.10</time>
+      <h3>V4.1 Flash：换架构，不换路线</h3>
+      <p>552B MoE，全新的 Causal-Encoder-Decoder 非对称结构：输入只激活 8B、输出激活 16B，原生多模态；KV Cache 对 HBM 需求降至 1/4、SSD 降至 1/8。官方称其全面超越 V4 Pro，API 同步降价；自 9 月 14 日起，<code>deepseek-v4-pro</code> 的请求全部路由到 V4.1 Flash、按 Flash 价格计费 [2]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.09</time>
+      <h3>内蒙古 16 万颗昇腾 950DT</h3>
+      <p>Bloomberg 报道该数据中心规划，配合 9 月初「向华为下大单」的传闻，国产算力闭环的轮廓第一次清晰起来 [8]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.10.17</time>
+      <h3>V4.1-Flash-1017</h3>
+      <p>小版本更新：推理、编程、Agent、视觉四项全面提升，同时输出更短、任务完成更快；API 新增网页搜索与抓取能力 [1][6]。</p>
+    </div>
+    <div class="tl-item">
+      <time>2026.10.20</time>
+      <h3>美国联邦民事机构禁用令公布</h3>
+      <p>白宫发布的命令禁止美国联邦民事机构使用 DeepSeek 产品，中方回应称这是以国家安全为借口的商业打压 [8]。</p>
+    </div>
+    <div class="tl-item mute">
+      <time>接下来</time>
+      <h3>V4.1 Pro 的空位、计费的拐点、IPO 的窗口</h3>
+      <p>V4 Pro 已经退场，Pro 档暂时空缺，V4.1 架构能否撑起更大的模型是下一个看点；Harness 内的 Search/Fetch 免费到 10 月 31 日，11 月 1 日起按 ¥5/千次计费 [4]。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 最新模型 ================= -->
+<section class="section" id="model">
+  <div class="section-head reveal">
+    <span class="eyebrow">03 · 最新模型</span>
+    <h2>V4.1-Flash-1017：把「便宜」做成一种能力</h2>
+    <p>严格说它不是新一代，而是 9 月 V4.1 Flash 的小版本更新。但官方给出的提升幅度，足以让它成为当下最值得用的 DeepSeek 模型——也是 API 文档里的现役主力（模型名 <code>deepseek-flash</code>）[1][4]。</p>
+  </div>
+
+  <div class="card-grid reveal">
+    <div class="card">
+      <span class="tag tag--accent">架构</span>
+      <h3>非对称的 Causal-Encoder-Decoder</h3>
+      <p>552B MoE，输入与输出不对称：编码侧只激活 <strong>8B</strong>、解码侧激活 <strong>16B</strong>，官方称同尺寸下成本显著更低。这也是它原生支持图像输入的原因 [2][6]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--accent">成本</span>
+      <h3>KV Cache 砍到 1/4</h3>
+      <p>相对上一代，KV Cache 对 HBM 的需求降至 1/4、对 SSD 降至 1/8；相对初代模型累计缩小 <strong>437 倍</strong>。Agent 场景里缓存命中费用占比高，这一刀直接砍在成本结构上 [2]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--accent">体验</span>
+      <h3>1M 上下文，更短输出</h3>
+      <p>保持 100 万 token 上下文；1017 版的重点之一是「更短输出、更快完成」——同等任务总用时下降，按 token 计费自然更省 [1][6]。</p>
+    </div>
+  </div>
+
+  <div class="table-wrap reveal" style="margin-top:var(--s-6)">
+    <table>
+      <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">V4.1-Flash-1017 与竞品的官方基准对比</caption>
+      <thead>
+        <tr>
+          <th>基准（越高越好）</th>
+          <th>V4.1-Flash-1017</th>
+          <th>V4.1-Flash</th>
+          <th>Kimi K3</th>
+          <th>GLM-5.3</th>
+          <th>GPT-5.6 Sol</th>
+          <th>Opus 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="now"><td>HLE（无工具）</td><td class="hl">42.6 <small>44.0†</small></td><td>36.8 <small>39.1†</small></td><td>43.5</td><td>42.0†</td><td>44.5</td><td>56.3</td></tr>
+        <tr class="now"><td>Terminal-Bench 4.0</td><td class="hl">42.3</td><td>31.2</td><td>12.6</td><td>37.9</td><td>39.9</td><td>51.8</td></tr>
+        <tr class="now"><td>DeepSWE v1.1</td><td class="hl">77.0</td><td>74.2</td><td>67.5</td><td>66.9</td><td>73.0</td><td>74.0</td></tr>
+        <tr class="now"><td>Agents’ Last Exam</td><td class="hl">35.4</td><td>31.8</td><td>27.6</td><td>28.5</td><td>26.7</td><td>28.6</td></tr>
+        <tr class="now"><td>Apex Bench v1.1</td><td class="hl">72.1</td><td>64.6</td><td>47.8</td><td>56.6</td><td>54.3</td><td>65.8</td></tr>
+        <tr class="now"><td>Chartography（带工具）</td><td class="hl">83.0</td><td>78.9</td><td>68.1</td><td>—</td><td>79.9</td><td>84.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note reveal">来源：V4.1-Flash-1017 官方模型卡（2026-10-17）[6]。† 为纯文本子集；Terminal-Bench 4.0 使用 Claude Code harness，DeepSWE 使用 Mini-SWE-V2 harness。表中为官方自测，横向比较请结合 harness 差异理解。</p>
+
+  <div class="callout reveal" style="margin-top:var(--s-5)">
+    <strong>怎么读这张表：</strong>对自家上一版，Terminal-Bench 4.0 从 31.2 涨到 42.3（+11.1），Apex 从 64.6 涨到 72.1，提升是实打实的；对竞品，它在 Agent 执行类任务上已超过 GPT-5.6 Sol 与 GLM-5.3，但纯知识推理（HLE）仍落后 Opus 约 14 分、与 K3/GLM 基本同档。<strong>结论：它是开源阵营里最能「干活」的模型之一，还不是最能「考试」的那个。</strong>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 跑分 ================= -->
+<section class="section" id="bench">
+  <div class="section-head reveal">
+    <span class="eyebrow">04 · 坐标</span>
+    <h2>综合第 9，Agent 第 1</h2>
+    <p>两个榜单拼出它的真实位置：不是全能冠军，但在「编程 / Agent × 成本」这一格几乎没有对手。</p>
+  </div>
+
+  <div class="two-col">
+    <div class="reveal">
+      <h3 style="margin-bottom:var(--s-4)">智能指数 · Artificial Analysis v4.3.2</h3>
+      <div class="chart" id="chartIndex"></div>
+      <p class="table-note">2026-09-25 快照，10 项评测综合分。V4.1-Flash-1017 尚未计入，因此 DeepSeek 的这一格是保守值 [12]。</p>
+    </div>
+    <div class="reveal">
+      <h3 style="margin-bottom:var(--s-4)">Terminal-Bench 2.1 · 终端任务通过率</h3>
+      <div class="chart" id="chartTB"></div>
+      <p class="table-note">2026-09 榜单（llm-stats），衡量真实终端环境下的 Agent 完成任务能力；1017 版未单列 [13]。</p>
+    </div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:var(--s-6)">
+    <strong>一句话定位：</strong>全球第一的 Claude Opus 5.5 在智能指数上拿 58 分，DeepSeek V4.1 Flash 是 39 分——差 19 分，但在 Terminal-Bench 这种「真干活」的榜单上，它反而以 90.6% 排第一，综合调用成本约为 Kimi K3 的 1/13。<strong>它卖的不是最强，是每块钱买到最多的智能。</strong>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 价格 ================= -->
+<section class="section" id="price">
+  <div class="section-head reveal">
+    <span class="eyebrow">05 · 价格</span>
+    <h2>峰谷计价，把「便宜」写进条款</h2>
+    <p>官方定价以百万 token 计，人民币结算；空闲时段是高峰时段的一半。这是它把算力成本转嫁给「时间」的方式。</p>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr><th>模型 / 接口</th><th>缓存命中输入</th><th>输入（未命中）</th><th>输出</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr class="now"><td><b>deepseek-flash</b><small>DeepSeek-V4.1-Flash-1017</small></td><td>¥0.02 <small>峰 ¥0.04</small></td><td>¥1 <small>峰 ¥2</small></td><td class="hl">¥4 <small>峰 ¥8</small></td><td>现役主力，原生多模态</td></tr>
+        <tr><td><b>deepseek-v4-pro</b><small>DeepSeek-V4-Pro-0813</small></td><td>¥0.15 <small>峰 ¥0.30</small></td><td>¥4.5 <small>峰 ¥9</small></td><td>¥13.5 <small>峰 ¥27</small></td><td>9-14 起请求已路由至 Flash，按 Flash 价计费</td></tr>
+        <tr><td><b>Search</b></td><td>—</td><td>—</td><td>—</td><td>¥5 / 千次成功请求</td></tr>
+        <tr><td><b>Fetch</b></td><td>—</td><td>—</td><td>—</td><td>¥5 / 千次成功请求</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note reveal">高峰时段为北京时间工作日 9:00–12:00、14:00–18:00；其余时段与周末、法定节假日为闲时，半价 [4]。DeepSeek Harness 内的 Server 端 Search、Fetch 目前免费，2026-11-01 00:00 起按次收费 [4]。</p>
+
+  <div class="callout reveal" style="margin-top:var(--s-5)">
+    <strong>横向比价：</strong>同为开源旗舰，Kimi K3 官方输出价 ¥100/百万 token、GLM-5.3 为 ¥28，DeepSeek V4.1 Flash 闲时 ¥4、峰时 ¥8——输出价约为 K3 的 <strong>1/25</strong>、GLM-5.3 的 <strong>1/7</strong> [4][17][18]。代价是高峰时段的排队与限速，以及「便宜」本身带来的质量波动。
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 谱系 ================= -->
+<section class="section" id="lineage">
+  <div class="section-head reveal">
+    <span class="eyebrow">06 · 模型谱系</span>
+    <h2>从 R1 到 V4.1，一条越走越窄的路</h2>
+    <p>参数不再一味变大：V4.1 用更小的激活规模换更低的单位成本。这是 DeepSeek 和「堆参数」路线最明显的分岔。</p>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr><th>模型</th><th>发布</th><th>参数（总 / 激活）</th><th>上下文</th><th>许可</th><th>状态</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>DeepSeek-R1</td><td>2025-01-20</td><td>671B / 37B</td><td>128K</td><td>MIT</td><td>已从 API 退役</td></tr>
+        <tr><td>DeepSeek-V3.2</td><td>2025-12-01</td><td>—</td><td>—</td><td>MIT</td><td>上一代开源旗舰</td></tr>
+        <tr><td>DeepSeek-V4-Flash</td><td>2026-07-31</td><td>284B / 13B</td><td>1M</td><td>MIT</td><td>被 V4.1 Flash 取代</td></tr>
+        <tr><td>DeepSeek-V4-Pro</td><td>2026-08-13</td><td>1.6T / 49B</td><td>1M</td><td>MIT</td><td>9-14 起路由至 V4.1 Flash</td></tr>
+        <tr><td>DeepSeek-V4.1-Flash</td><td>2026-09-10</td><td>552B / 8B + 16B</td><td>1M</td><td>MIT</td><td>现役</td></tr>
+        <tr class="now"><td><b>DeepSeek-V4.1-Flash-1017</b></td><td>2026-10-17</td><td>同架构 / 小版本更新</td><td>1M</td><td>MIT</td><td>现役最新</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note reveal">参数与发布日期来源：官方公告、Hugging Face 模型卡与维基百科 [2][3][6][7][8][9]。V3.2 的参数量官方未在发布页强调，此处留空不臆测。</p>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 口碑 ================= -->
+<section class="section" id="reputation">
+  <div class="section-head reveal">
+    <span class="eyebrow">07 · 口碑</span>
+    <h2>掌声与嘘声，都很大声</h2>
+    <p>社区对 DeepSeek 的评价几乎是两个极端——爱的人爱它的价格，恨的人恨它的不稳定。</p>
+  </div>
+
+  <div class="two-col">
+    <div class="panel reveal">
+      <h3>👍 掌声</h3>
+      <ul>
+        <li><b>Agent 能力第一梯队。</b>Terminal-Bench 2.1 通过率 90.6%，压过 Kimi K3（88.3%）与 GLM-5.3（88.2%）[13]。</li>
+        <li><b>价格屠夫。</b>输出价约为 K3 的 1/25；Reddit 高赞测算称其达到 GPT-6 Astra 平均分的 98%，成本只有 1%——社区测算，非官方口径 [19]。</li>
+        <li><b>开源与部署友好。</b>MIT 权重、2k 卡可起步的私有化方案，社区适配速度快 [2][11]。</li>
+        <li><b>生态外溢。</b>DeepSeek Harness 25.7 万星，成为智能体框架里增长最快的项目之一 [10][11]。</li>
+      </ul>
+    </div>
+    <div class="panel panel--muted reveal">
+      <h3>👎 嘘声</h3>
+      <ul>
+        <li><b>质量不稳。</b>知乎有实测者直言 V4.1 Flash「结果惨不忍睹……是当前深度求索发布体验最差、最不严谨的版本」[19]。</li>
+        <li><b>涨价打破预期。</b>V4 时代 API 价格上调，社区对「永远最便宜」的预期被打破 [19]。</li>
+        <li><b>声量落后。</b>Reddit 单帖最高 1,717 赞，低于 GLM-5.3（3,825）与 Kimi K3（3,292）[19]。</li>
+        <li><b>重任务耗时长。</b>实测 V4 Pro 完成一次线上改造用了 39 分钟，长任务仍需耐心 [19]。</li>
+      </ul>
+    </div>
+  </div>
+
+  <blockquote class="reveal" style="margin-top:var(--s-6)">
+    「那个曾经的国模一哥回来了」——这句知乎高赞说的是智谱 GLM-5.3，不是 DeepSeek。社区情绪已经变了：DeepSeek 不再是默认答案，而是「预算有限时的最优解」。
+    <cite>—— 2026 年 7–9 月中文社区口碑整理 [19]</cite>
+  </blockquote>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 看点 ================= -->
+<section class="section" id="watch">
+  <div class="section-head reveal">
+    <span class="eyebrow">08 · 接下来</span>
+    <h2>四个还没落地的变量</h2>
+  </div>
+  <div class="card-grid card-grid--2 reveal">
+    <div class="card">
+      <span class="tag tag--muted">监管</span>
+      <h3>美国禁令的实际影响</h3>
+      <p>10 月 20 日公布的联邦民事机构禁用令，短期不影响商业 API，但会压缩其海外政企市场，并可能引发盟友跟进 [8]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--muted">算力</span>
+      <h3>16 万颗昇腾能否落地</h3>
+      <p>内蒙古数据中心的规划若按期兑现，DeepSeek 将第一次拥有不依赖英伟达的成本曲线；若延期，「极致低价」的可持续性就要打问号 [8]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--muted">产品</span>
+      <h3>V4.1 Pro 的空位</h3>
+      <p>V4 Pro 已退场，Pro 档暂时由 Flash 顶替。V4.1 的非对称架构能否撑起 1T 级模型，决定它能不能重新摸到 Opus 的门槛 [2]。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag--muted">资本</span>
+      <h3>IPO 与 700 亿美元估值</h3>
+      <p>最早 2027 年上市、新一轮按 700 亿美元 pre-money 洽谈。资本市场如何给一家「研究优先、不急于商业化」的公司定价，是 2027 年最大的悬念 [8]。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ================= 来源 ================= -->
+<section class="section" id="refs">
+  <div class="section-head reveal">
+    <span class="eyebrow">数据来源与说明</span>
+    <h2>本页所有关键数字的出处</h2>
+  </div>
+  <div class="disclaimer reveal" style="margin-bottom:var(--s-6)">
+    <strong>请带着时效意识阅读：</strong>大模型行业以「周」为单位迭代，本页数据截至 <strong>2026 年 10 月 22 日</strong>，均来自官方页面、模型卡与公开报道。标注「待核实」的字段表示公开来源尚不一致，为避免误导暂不填数；价格随时可能调整，以 DeepSeek 官网为准。
+  </div>
+  <ol class="refs reveal" id="refList"><!-- 由 JS 渲染来源列表 --></ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>DeepSeek 现状档案 · 数据截至 2026-10-22 · 与「国产大模型全景」同一设计系统</span>
+    <span>用 HTML + CSS 手工排印，无跟踪、无外部脚本（字体加载失败时自动回退系统字体）。</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- 导航滚动态 ---------- */
+const nav = document.querySelector('.nav');
+if (nav) addEventListener('scroll', () => nav.toggleAttribute('data-scrolled', scrollY > 8), {passive:true});
+
+/* ---------- 条形图渲染 ---------- */
+/* color: 'ds' 朱砂橙 / 'cn' 浅橙 / 'us' 灰。max 为 100% 基准。 */
+function renderChart(id, items, {max, unit='', unitPre='', suffix=''}={}) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = max || Math.max(...items.map(i => i.v));
+  el.innerHTML = items.map(it => {
+    const pct = Math.max(2, Math.min(100, it.v / top * 100));
+    const val = typeof it.v === 'number'
+      ? (Number.isInteger(it.v) ? it.v : (it.v < 10 ? it.v.toFixed(2) : it.v.toFixed(1)))
+      : it.v;
+    return `<div class="bar-row">
+      <span class="label">${it.label}</span>
+      <div class="bar-track">
+        <div class="bar-fill bar-fill--${it.color}" style="width:${pct}%"></div>
+      </div>
+      <span class="bar-val">${unitPre}${val}${unit}${it.note ? ' · ' + it.note : ''}${suffix}</span>
+    </div>`;
+  }).join('');
+}
+
+/* 智能指数：Artificial Analysis v4.3.2，2026-09-25 快照 [12] */
+renderChart('chartIndex', [
+  {label:'Claude Opus 5.5', v:58, color:'us', note:'全球第一'},
+  {label:'GPT-6 Astra',     v:53, color:'us'},
+  {label:'MiMo-V2.6-Pro',   v:46, color:'cn'},
+  {label:'GLM-5.3',         v:45, color:'cn'},
+  {label:'Qwen3.8-Max',     v:45, color:'cn'},
+  {label:'Kimi K3',         v:44, color:'cn'},
+  {label:'V4.1-Flash',      v:39, color:'ds', note:'第 9'},
+  {label:'V4-Pro',          v:36, color:'ds'},
+], {max:60});
+
+/* Terminal-Bench 2.1：2026-09 榜 [13] */
+renderChart('chartTB', [
+  {label:'V4.1-Flash',      v:90.6, color:'ds', note:'第 1'},
+  {label:'Kimi K3',         v:88.3, color:'cn'},
+  {label:'GLM-5.3',         v:88.2, color:'cn'},
+  {label:'V4-Pro',          v:87.9, color:'ds'},
+  {label:'Qwen3.8-Max',     v:86.6, color:'cn'},
+  {label:'GLM-5.3-Flash',   v:84.3, color:'cn'},
+], {max:100, unit:'%'});
+
+/* ---------- 数据来源 ---------- */
+const REFS = [
+  {t:'DeepSeek 官网首页：V4.1-Flash-1017 更新公告（2026-10）', u:'https://www.deepseek.com/'},
+  {t:'DeepSeek 官方发布：V4.1 Flash —— 更强、更快、更普惠（2026-09-10）', u:'https://www.deepseek.com/news/deepseek-v4-1-flash/'},
+  {t:'DeepSeek 官方发布：V4 预览版，百万上下文普惠（2026-04-24）', u:'https://www.deepseek.com/news/v4-preview/'},
+  {t:'DeepSeek API 文档：模型与价格（中文，2026-10）', u:'https://api-docs.deepseek.com/zh-cn/quick_start/pricing'},
+  {t:'DeepSeek API 文档：快速开始与现役模型名（2026-10）', u:'https://api-docs.deepseek.com/quick_start/pricing'},
+  {t:'Hugging Face：DeepSeek-V4.1-Flash-1017 模型卡与技术报告链接（2026-10-17）', u:'https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017'},
+  {t:'Hugging Face：DeepSeek-V4-Pro-0813 模型卡（1.6T 参数、MIT、Terminal-Bench 2.1 87.9）', u:'https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813'},
+  {t:'Wikipedia：DeepSeek —— 融资、估值、IPO、昇腾数据中心、美国禁令、Anthropic 指控', u:'https://en.wikipedia.org/wiki/DeepSeek'},
+  {t:'Wikipedia：DeepSeek (chatbot) —— V4/V4.1 架构、32T tokens、免费不限次数', u:'https://en.wikipedia.org/wiki/DeepSeek_(chatbot)'},
+  {t:'GitHub：deepseek-ai 组织（Harness、DeepInfer、DeepGEMM 等，星标数为 2026-10-21 快照）', u:'https://github.com/deepseek-ai'},
+  {t:'GitHub：DeepSeek Harness —— Everything is a Plugin（MIT）', u:'https://github.com/deepseek-ai/deepseek-harness'},
+  {t:'Artificial Analysis：Intelligence Index v4.3.2（2026-09-25 快照）', u:'https://artificialanalysis.ai/'},
+  {t:'llm-stats：Terminal-Bench 2.1 Leaderboard（2026-09）', u:'https://llm-stats.com/'},
+  {t:'QuestMobile：2026-06 国内 AI 原生 App 月活（DeepSeek 1.30 亿）', u:'https://www.questmobile.com.cn/research/report/2046482337382842370/'},
+  {t:'金融界转载 QuestMobile 月活数据（2026-07）', u:'https://finance.jrj.com.cn/2026/07/14112457788881.shtml'},
+  {t:'arXiv：DeepSeek-V4 —— Towards Highly Efficient Million-Token Context Intelligence', u:'https://arxiv.org/abs/2606.19348'},
+  {t:'月之暗面：Kimi API 定价（K3 输入 ¥20 / 输出 ¥100 每百万 token）', u:'https://platform.moonshot.cn/docs/pricing/chat'},
+  {t:'智谱开放平台：GLM-5.3 定价（输入 ¥8 / 输出 ¥28 每百万 token）', u:'https://docs.bigmodel.cn/cn/guide/start/pricing'},
+  {t:'中文社区口碑整理：知乎 587 条结果 / 178 篇正文、B 站 168 条、Reddit 66 条、V2EX 与 HN 讨论（2026-07 至 09，本地调研稿）', u:'https://www.zhihu.com/search?q=DeepSeek%20V4.1%20Flash'},
+];
+
+const refList = document.getElementById('refList');
+if (refList) {
+  refList.innerHTML = REFS.map((r,i) => {
+    const links = ['u','u2','u3'].map(k => r[k]
+      ? `<a href="${r[k]}" target="_blank" rel="noopener">${new URL(r[k]).hostname.replace(/^www\./,'')}</a>`
+      : '').filter(Boolean).join(' · ');
+    return `<li>${r.t}　${links}</li>`;
+  }).join('');
+}
+
+/* ---------- 滚动淡入 ---------- */
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, {threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+</script>
+</body>
+</html>
