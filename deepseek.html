@@ -9,7 +9,12 @@
 <meta property="og:description" content="一家 160 人的公司，把前沿智能做成了平价品。V4.1-Flash-1017 最新模型、跑分、价格与争议，一页看懂。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://edwardmah007-hue.github.io/cn-llm/deepseek.html">
-<meta property="og:image" content="https://edwardmah007-hue.github.io/cn-llm/og-image.png">
+<meta property="og:image" content="https://edwardmah007-hue.github.io/cn-llm/og-deepseek.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#faf9f7">
+<link rel="canonical" href="https://edwardmah007-hue.github.io/cn-llm/deepseek.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8552f'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23faf9f7' font-family='serif'%3E%E6%B7%B1%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,6 +110,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin-block:0}
   white-space:nowrap;border-bottom:none;
   transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease)}
 .nav__link:hover{color:var(--ink);background:var(--n-100)}
+.nav__link.is-active{color:var(--accent);background:var(--accent-soft)}
 .nav__badge{font-size:var(--t--1);color:var(--accent);border:1px solid
   color-mix(in srgb,var(--accent) 35%,transparent);border-radius:var(--r-pill);
   padding:4px 10px;white-space:nowrap}
@@ -234,6 +240,116 @@ footer{border-top:1px solid var(--line);padding-block:var(--s-7);color:var(--ink
   font-size:var(--t--1)}
 footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
 
+
+/* ---------- 阅读进度 / 跳转 / 锚点 ---------- */
+.skip{position:fixed;left:var(--s-4);top:-4rem;z-index:80;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-1);padding:8px 12px;color:var(--ink)}
+.skip:focus{top:var(--s-3)}
+.progress{position:fixed;inset:0 0 auto 0;height:2px;z-index:60;pointer-events:none}
+.progress__bar{display:block;height:100%;width:100%;background:var(--accent);
+  transform:scaleX(0);transform-origin:0 50%}
+section[id],#main{scroll-margin-top:76px}
+
+/* ---------- 30 秒速览 ---------- */
+.tldr{margin-top:var(--s-7);border-top:1px solid var(--line);padding-top:var(--s-5)}
+.tldr__label{display:block;font-size:var(--t--1);font-weight:600;letter-spacing:.12em;
+  color:var(--accent)}
+.tldr__list{list-style:none;display:grid;gap:var(--s-4);margin-top:var(--s-3);
+  grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));counter-reset:tldr}
+.tldr__list li{counter-increment:tldr;position:relative;padding-left:2.2em;
+  font-size:var(--t-0);line-height:1.7;color:var(--n-700);max-width:none}
+.tldr__list li::before{content:counter(tldr,decimal-leading-zero);position:absolute;left:0;top:.05em;
+  font-family:var(--font-serif);font-weight:700;color:var(--accent);
+  font-variant-numeric:tabular-nums}
+.tldr__list b{color:var(--ink)}
+.nowrap{white-space:nowrap}
+
+/* ---------- 非对称激活图 ---------- */
+.asym{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-4);
+  padding:var(--s-5)}
+.asym__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s-1) var(--s-4);
+  margin-bottom:var(--s-4)}
+.asym__head h3{font-size:var(--t-0)}
+.asym__head p{font-size:var(--t--1);color:var(--ink-muted)}
+.asym-row{display:grid;grid-template-columns:11.5em 1fr 5.4em;align-items:center;
+  gap:var(--s-3);font-size:var(--t--1);margin-block:var(--s-2)}
+.asym-row .label{color:var(--ink-muted);text-align:right}
+.asym-row .track{height:20px;background:var(--n-100);border-radius:var(--r-1);overflow:hidden}
+.asym-row .track i{display:block;height:100%;background:var(--accent)}
+.asym-row.asym-row--in .track i{background:color-mix(in srgb,var(--accent) 55%,var(--n-200))}
+.asym-row .val{font-weight:600;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:var(--t--1)}
+.asym__note{margin-top:var(--s-4);font-size:var(--t--1);color:var(--ink-muted);
+  line-height:1.75;max-width:54em}
+
+/* ---------- 价格计算器 ---------- */
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-4);
+  padding:var(--s-5)}
+.calc__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:var(--s-4)}
+.calc__head h3{margin-top:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:3px;background:var(--n-100)}
+.seg button{border:0;background:transparent;color:var(--ink-muted);padding:6px 14px;
+  border-radius:var(--r-pill);cursor:pointer;font-size:var(--t--1);
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}
+.seg button.is-on{background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
+.calc__body{display:grid;gap:var(--s-5);margin-top:var(--s-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.calc__controls{display:flex;flex-direction:column;gap:var(--s-4)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field__top{display:flex;justify-content:space-between;gap:var(--s-3);
+  font-size:var(--t--1);color:var(--n-700)}
+.field__top output{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
+.field input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.calc__out{border-left:1px solid var(--line);padding-left:var(--s-5)}
+.calc__row{display:grid;grid-template-columns:9.8em 1fr 6em;gap:var(--s-3);
+  align-items:center;margin-block:var(--s-3);font-size:var(--t--1)}
+.calc__row .name{color:var(--n-700)}
+.calc__row .track{height:18px;background:var(--n-100);border-radius:var(--r-1);overflow:hidden}
+.calc__row .track i{display:block;height:100%;background:var(--accent);min-width:2px;
+  transition:width .5s var(--ease)}
+.calc__row.is-other .track i{background:var(--n-400)}
+.calc__row .cost{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+.calc__note{margin-top:var(--s-4);font-size:var(--t--1);color:var(--ink-muted);line-height:1.7}
+@media (max-width:720px){
+  .calc__out{border-left:0;border-top:1px solid var(--line);padding-left:0;
+    padding-top:var(--s-4)}
+}
+@media (max-width:420px){
+  .calc__row{grid-template-columns:1fr auto}
+  .calc__row .track{grid-column:1/-1}
+  .asym-row{grid-template-columns:1fr auto}
+  .asym-row .label{grid-column:1/-1;text-align:left}
+}
+
+/* ---------- 图例 ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:var(--s-4);margin-bottom:var(--s-3);
+  font-size:var(--t--1);color:var(--ink-muted)}
+.legend .dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+  margin-right:5px;vertical-align:middle}
+
+/* ---------- FAQ ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:var(--s-4) 0;display:flex;
+  align-items:center;justify-content:space-between;gap:var(--s-4);
+  font-family:var(--font-serif);font-size:var(--t-0);font-weight:700;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-sans);color:var(--accent);
+  font-size:var(--t-1);line-height:1;transition:transform var(--dur) var(--ease)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 var(--s-4);font-size:var(--t-0);color:var(--n-700);max-width:46em}
+
+/* ---------- 页脚操作 ---------- */
+.footer-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3);
+  margin-top:var(--s-2)}
+.copy{font-size:var(--t--1);color:var(--accent);background:transparent;
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  border-radius:var(--r-pill);padding:5px 12px;cursor:pointer;
+  transition:background var(--dur) var(--ease)}
+.copy:hover{background:var(--accent-soft)}
+
 /* ---------- 动效 ---------- */
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0;transform:translateY(14px);
@@ -244,13 +360,15 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
   *,*::before,*::after{animation-duration:.01ms !important;
     transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
-@media print{ .nav{display:none} .section{padding-block:var(--s-6)} }
+@media print{ .nav,.progress,.skip,.seg,.calc{display:none} .section{padding-block:var(--s-6)} .faq details{page-break-inside:avoid} }
 </style>
 </head>
 <body>
 
 <!-- ================= 导航 ================= -->
-<nav class="nav" id="top">
+<div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+<a class="skip" href="#main">跳到正文</a>
+<nav class="nav" id="top" aria-label="章节导航">
   <div class="nav__brand">DeepSeek 现状档案<small>DEEPSEEK · 2026</small></div>
   <div class="nav__links">
     <a class="nav__link" href="#status">现状</a>
@@ -261,6 +379,7 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
     <a class="nav__link" href="#lineage">谱系</a>
     <a class="nav__link" href="#reputation">口碑</a>
     <a class="nav__link" href="#watch">看点</a>
+    <a class="nav__link" href="#faq">问答</a>
     <a class="nav__link" href="#refs">来源</a>
   </div>
   <span class="nav__badge">数据截至 2026-10</span>
@@ -300,10 +419,19 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
         <span class="stat__note">DeepSeek Harness，8 月开发者预览，MIT 协议 [10][11]</span>
       </div>
     </div>
+
+    <div class="tldr reveal">
+      <span class="tldr__label">30 秒速览</span>
+      <ol class="tldr__list">
+        <li><b>谁：</b>约 160 人的研究型公司，<span class="nowrap">MIT 开源</span>、C 端免费，2026 年估值 $52B [8][9]。</li>
+        <li><b>最新：</b>V4.1-Flash-1017（10-17），552B MoE、1M 上下文，Agent 执行力<span class="nowrap">第一梯队</span> [1][6]。</li>
+        <li><b>值不值：</b>Terminal-Bench 2.1 第一 [13]，输出价 ¥4 起、约为 Kimi K3 的 1/25 [4][17]；短板是稳定性与综合推理 [12][19]。</li>
+      </ol>
+    </div>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
 
 <!-- ================= 现状 ================= -->
 <section class="section" id="status">
@@ -428,6 +556,24 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
     </div>
   </div>
 
+  <div class="asym reveal" style="margin-top:var(--s-5)">
+    <div class="asym__head">
+      <h3>为什么能便宜：读入和写出，用的不是同一套参数</h3>
+      <p>V4.1 Flash 的 Causal-Encoder-Decoder 结构 [2][6]</p>
+    </div>
+    <div class="asym-row asym-row--in">
+      <span class="label">输入侧 · Encoder</span>
+      <div class="track"><i style="width:50%"></i></div>
+      <span class="val">8B 激活</span>
+    </div>
+    <div class="asym-row">
+      <span class="label">输出侧 · Decoder</span>
+      <div class="track"><i style="width:100%"></i></div>
+      <span class="val">16B 激活</span>
+    </div>
+    <p class="asym__note">同一个模型，读入长文档、代码库时只跑 8B 的编码器；真正生成内容时，编码器与解码器一起工作，约 16B。传统同规模模型输入输出共用同一套激活参数，长上下文的每一页都要按全价算——CED 把「读」和「写」拆开计价，长输入场景的成本差距由此拉开。</p>
+  </div>
+
   <div class="table-wrap reveal" style="margin-top:var(--s-6)">
     <table>
       <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">V4.1-Flash-1017 与竞品的官方基准对比</caption>
@@ -471,12 +617,21 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
 
   <div class="two-col">
     <div class="reveal">
-      <h3 style="margin-bottom:var(--s-4)">智能指数 · Artificial Analysis v4.3.2</h3>
+      <h3 style="margin-bottom:var(--s-2)">智能指数 · Artificial Analysis v4.3.2</h3>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--accent)"></i>DeepSeek</span>
+        <span><i class="dot" style="background:color-mix(in srgb,var(--accent) 55%,var(--n-200))"></i>国产旗舰</span>
+        <span><i class="dot" style="background:var(--n-400)"></i>海外</span>
+      </div>
       <div class="chart" id="chartIndex"></div>
       <p class="table-note">2026-09-25 快照，10 项评测综合分。V4.1-Flash-1017 尚未计入，因此 DeepSeek 的这一格是保守值 [12]。</p>
     </div>
     <div class="reveal">
-      <h3 style="margin-bottom:var(--s-4)">Terminal-Bench 2.1 · 终端任务通过率</h3>
+      <h3 style="margin-bottom:var(--s-2)">Terminal-Bench 2.1 · 终端任务通过率</h3>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--accent)"></i>DeepSeek</span>
+        <span><i class="dot" style="background:color-mix(in srgb,var(--accent) 55%,var(--n-200))"></i>国产旗舰</span>
+      </div>
       <div class="chart" id="chartTB"></div>
       <p class="table-note">2026-09 榜单（llm-stats），衡量真实终端环境下的 Agent 完成任务能力；1017 版未单列 [13]。</p>
     </div>
@@ -511,6 +666,39 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
     </table>
   </div>
   <p class="table-note reveal">高峰时段为北京时间工作日 9:00–12:00、14:00–18:00；其余时段与周末、法定节假日为闲时，半价 [4]。DeepSeek Harness 内的 Server 端 Search、Fetch 目前免费，2026-11-01 00:00 起按次收费 [4]。</p>
+
+  <div class="calc reveal" style="margin-top:var(--s-5)">
+    <div class="calc__head">
+      <div>
+        <span class="eyebrow">自己算一算</span>
+        <h3>你的用量，一个月要花多少钱？</h3>
+      </div>
+      <div class="seg" id="peakSeg" role="group" aria-label="计费时段">
+        <button type="button" data-peak="0" class="is-on" aria-pressed="true">闲时价</button>
+        <button type="button" data-peak="1" aria-pressed="false">高峰价</button>
+      </div>
+    </div>
+    <div class="calc__body">
+      <div class="calc__controls">
+        <label class="field" for="inTok">
+          <span class="field__top"><span>每次请求输入</span><output id="inTokOut">8,000 tokens</output></span>
+          <input id="inTok" type="range" min="500" max="64000" step="500" value="8000">
+        </label>
+        <label class="field" for="outTok">
+          <span class="field__top"><span>每次请求输出</span><output id="outTokOut">800 tokens</output></span>
+          <input id="outTok" type="range" min="100" max="16000" step="100" value="800">
+        </label>
+        <label class="field" for="reqDay">
+          <span class="field__top"><span>每天请求数</span><output id="reqDayOut">500 次</output></span>
+          <input id="reqDay" type="range" min="10" max="20000" step="10" value="500">
+        </label>
+      </div>
+      <div class="calc__out">
+        <div id="calcRows" aria-live="polite"></div>
+        <p class="calc__note" id="calcNote"></p>
+      </div>
+    </div>
+  </div>
 
   <div class="callout reveal" style="margin-top:var(--s-5)">
     <strong>横向比价：</strong>同为开源旗舰，Kimi K3 官方输出价 ¥100/百万 token、GLM-5.3 为 ¥28，DeepSeek V4.1 Flash 闲时 ¥4、峰时 ¥8——输出价约为 K3 的 <strong>1/25</strong>、GLM-5.3 的 <strong>1/7</strong> [4][17][18]。代价是高峰时段的排队与限速，以及「便宜」本身带来的质量波动。
@@ -616,6 +804,42 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
 
 <hr class="rule">
 
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="section-head reveal">
+    <span class="eyebrow">09 · 常见问题</span>
+    <h2>关于 DeepSeek，最常被问到的六件事</h2>
+  </div>
+  <div class="faq reveal">
+    <details>
+      <summary>DeepSeek 现在免费吗？</summary>
+      <p>C 端 App 与网页版免费、不限提问次数 [9]；API 按量计费，V4.1 Flash 闲时输出 ¥4/百万 token、高峰 ¥8，缓存命中输入低至 ¥0.02 [4]。</p>
+    </details>
+    <details>
+      <summary>权重可以商用吗？</summary>
+      <p>V4 与 V4.1 系列权重以 MIT 协议开源，允许商用、修改与再分发，保留版权与许可声明即可；具体条款以 Hugging Face 模型卡附带的 LICENSE 为准 [2][6][7]。</p>
+    </details>
+    <details>
+      <summary>最新模型到底是哪一个？</summary>
+      <p>V4.1-Flash-1017（2026-10-17），是 9 月 V4.1 Flash 的小版本更新；API 模型名为 <code>deepseek-flash</code>，旧名 <code>deepseek-v4-flash</code> 已下线并路由至新模型 [1][4]。</p>
+    </details>
+    <details>
+      <summary>V4 Pro 还能调用吗？</summary>
+      <p>自 2026-09-14 起，<code>deepseek-v4-pro</code> 的请求已全部路由至 V4.1 Flash、按 Flash 价格计费；Pro 档暂时空缺 [2][4]。</p>
+    </details>
+    <details>
+      <summary>和 Kimi K3、GLM-5.3 怎么选？</summary>
+      <p>编程、Agent、批量任务优先看 DeepSeek——Terminal-Bench 2.1 第一，输出价也最低；需要更强的综合推理或更稳的长文输出，K3、GLM-5.3 与 Opus 仍是上位选择。最稳的办法是用自己的任务做一轮 A/B [13][17][18]。</p>
+    </details>
+    <details>
+      <summary>为什么能把价格压这么低？</summary>
+      <p>三件事叠加：CED 非对称激活（输入 8B、输出 16B）、KV Cache 压到上一代的 1/4、峰谷定价；再往外一层，是国产算力替代带来的成本结构变化 [2][4][8]。</p>
+    </details>
+  </div>
+</section>
+
+<hr class="rule">
+
 <!-- ================= 来源 ================= -->
 <section class="section" id="refs">
   <div class="section-head reveal">
@@ -634,6 +858,10 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
   <div class="wrap">
     <span>DeepSeek 现状档案 · 数据截至 2026-10-22 · 与「国产大模型全景」同一设计系统</span>
     <span>用 HTML + CSS 手工排印，无跟踪、无外部脚本（字体加载失败时自动回退系统字体）。</span>
+    <span class="footer-actions">
+      <button type="button" class="copy" id="copyLink">复制本页链接</button>
+      <span>可自由分享，注明出处即可</span>
+    </span>
   </div>
 </footer>
 
@@ -641,6 +869,34 @@ footer .wrap{display:flex;flex-direction:column;gap:var(--s-2)}
 /* ---------- 导航滚动态 ---------- */
 const nav = document.querySelector('.nav');
 if (nav) addEventListener('scroll', () => nav.toggleAttribute('data-scrolled', scrollY > 8), {passive:true});
+
+/* ---------- 阅读进度 ---------- */
+const progressBar = document.getElementById('progressBar');
+if (progressBar && progressBar.style && document.documentElement) {
+  const updateProgress = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    progressBar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0) + ')';
+  };
+  addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+}
+
+/* ---------- 当前章节高亮 ---------- */
+if ('IntersectionObserver' in window) {
+  const links = [...document.querySelectorAll('.nav__link')];
+  if (links.length) {
+    const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const setActive = id => {
+      links.forEach(a => a.classList.remove('is-active'));
+      const a = map.get(id);
+      if (a) a.classList.add('is-active');
+    };
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
+  }
+}
 
 /* ---------- 条形图渲染 ---------- */
 /* color: 'ds' 朱砂橙 / 'cn' 浅橙 / 'us' 灰。max 为 100% 基准。 */
@@ -717,6 +973,74 @@ if (refList) {
     return `<li>${r.t}　${links}</li>`;
   }).join('');
 }
+
+/* ---------- 价格计算器 ---------- */
+(function initCalc(){
+  const byId = id => document.getElementById(id);
+  const inTok = byId('inTok'), outTok = byId('outTok'), reqDay = byId('reqDay');
+  const rows = byId('calcRows'), note = byId('calcNote'), seg = byId('peakSeg');
+  const outs = {in: byId('inTokOut'), out: byId('outTokOut'), req: byId('reqDayOut')};
+  if (!inTok || !outTok || !reqDay || !rows || !note) return;
+  const MODELS = [
+    {name:'DeepSeek V4.1 Flash', key:'ds'},
+    {name:'Kimi K3', key:'k3'},
+    {name:'GLM-5.3', key:'glm'},
+  ];
+  let peak = false;
+  const ints = v => Math.round(v).toLocaleString('zh-CN');
+  const money = v => v >= 1000 ? '¥' + Math.round(v).toLocaleString('zh-CN')
+    : v >= 100 ? '¥' + Math.round(v).toLocaleString('zh-CN')
+    : v >= 1 ? '¥' + v.toFixed(2) : '¥' + v.toFixed(3);
+  const prices = key => key === 'ds' ? (peak ? [2, 8] : [1, 4])
+    : key === 'k3' ? [20, 100] : [8, 28];
+  function calc(){
+    const iv = Number(inTok.value) || 8000;
+    const ov = Number(outTok.value) || 800;
+    const rd = Number(reqDay.value) || 500;
+    if (outs.in) outs.in.textContent = ints(iv) + ' tokens';
+    if (outs.out) outs.out.textContent = ints(ov) + ' tokens';
+    if (outs.req) outs.req.textContent = ints(rd) + ' 次';
+    const vals = MODELS.map(m => {
+      const p = prices(m.key);
+      return {m, v:(iv * p[0] + ov * p[1]) / 1e6 * rd * 30};
+    });
+    const top = Math.max(...vals.map(x => x.v), 1);
+    rows.innerHTML = vals.map(x => `<div class="calc__row ${x.m.key === 'ds' ? 'is-ds' : 'is-other'}">
+      <span class="name">${x.m.name}</span>
+      <div class="track"><i style="width:${Math.max(2, x.v / top * 100)}%"></i></div>
+      <span class="cost">${money(x.v)}</span>
+    </div>`).join('');
+    const ds = vals[0].v, k3 = vals[1].v, glm = vals[2].v;
+    note.textContent = `同样用量，DeepSeek 的月成本约为 Kimi K3 的 ${(ds / k3 * 100).toFixed(1)}%、GLM-5.3 的 ${(ds / glm * 100).toFixed(1)}%。按 30 天估算，不含缓存命中、重试与 Search/Fetch 费用；价格取官方标价（2026-10）[4][17][18]。`;
+  }
+  [inTok, outTok, reqDay].forEach(e => { if (e.addEventListener) e.addEventListener('input', calc); });
+  if (seg && seg.querySelectorAll) {
+    seg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      peak = b.getAttribute('data-peak') === '1';
+      seg.querySelectorAll('button').forEach(x => {
+        x.classList.toggle('is-on', x === b);
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+      });
+      calc();
+    }));
+  }
+  calc();
+})();
+
+/* ---------- 复制链接 ---------- */
+(function initCopy(){
+  const btn = document.getElementById('copyLink');
+  if (!btn || !btn.addEventListener) return;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      btn.textContent = '已复制链接';
+    } catch (e) {
+      btn.textContent = '复制失败，请手动复制';
+    }
+    setTimeout(() => { btn.textContent = '复制本页链接'; }, 1800);
+  });
+})();
 
 /* ---------- 滚动淡入 ---------- */
 if ('IntersectionObserver' in window) {
